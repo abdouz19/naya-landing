@@ -1,0 +1,2833 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAYHA — Ton parcours professionnel, accompagné</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --rose: #C4626A;
+      --rose-light: #D4868C;
+      --rose-glow: rgba(196,98,106,0.15);
+      --rose-pale: rgba(196,98,106,0.06);
+      --brun: #3C2A22;
+      --brun-soft: #5A453B;
+      --or: #C49A2A;
+      --or-light: #E8C55C;
+      --or-glow: rgba(196,154,42,0.10);
+      --creme: #FAF6F1;
+      --creme-dark: #F0EAE2;
+      --white: #FFFFFF;
+      --gray: #8A8078;
+      --gray-light: #C8C1BA;
+      --green: #2F6B47;
+      --green-light: rgba(47,107,71,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--creme);
+      color: var(--brun);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ================================================================
+       GLOBAL — reveal system
+       ================================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+    .d5 { transition-delay: 0.5s; }
+    .d6 { transition-delay: 0.6s; }
+    .d7 { transition-delay: 0.7s; }
+
+    /* ================================================================
+       CURSOR GLOW — hero only
+       ================================================================ */
+    .cursor-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--rose-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.4s;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-glow.active { opacity: 0.5; }
+
+    /* ================================================================
+       NAV — glass morphism
+       ================================================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      background: rgba(250,246,241,0.75);
+      border-bottom: 1px solid rgba(60,42,34,0.05);
+      transition: box-shadow 0.4s, background 0.4s;
+    }
+    nav.scrolled {
+      box-shadow: 0 1px 30px rgba(60,42,34,0.08);
+      background: rgba(250,246,241,0.92);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 40px;
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      font-style: italic;
+      color: var(--rose);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--brun);
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.45;
+      transition: opacity 0.3s;
+      letter-spacing: 0.2px;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-cta {
+      background: var(--brun) !important;
+      color: var(--creme) !important;
+      padding: 10px 26px !important;
+      border-radius: 100px !important;
+      opacity: 1 !important;
+      font-weight: 600 !important;
+      font-size: 12px !important;
+      letter-spacing: 0.5px !important;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s !important;
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px) !important;
+      box-shadow: 0 6px 24px rgba(60,42,34,0.2) !important;
+    }
+
+    /* Mobile menu button */
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      position: relative;
+    }
+    .menu-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--brun);
+      border-radius: 2px;
+      position: absolute;
+      left: 6px;
+      transition: 0.3s;
+    }
+    .menu-btn span:nth-child(1) { top: 9px; }
+    .menu-btn span:nth-child(2) { top: 15px; }
+    .menu-btn span:nth-child(3) { top: 21px; }
+
+    /* ---- Mobile menu ---- */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 99;
+      background: var(--creme);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .mobile-menu.open {
+      display: flex;
+      opacity: 1;
+    }
+    .mobile-menu a {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--brun);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--rose); }
+    .mobile-menu-cta {
+      background: var(--rose) !important;
+      color: var(--white) !important;
+      padding: 14px 36px !important;
+      border-radius: 100px !important;
+      font-weight: 600 !important;
+      margin-top: 12px;
+    }
+
+    /* ================================================================
+       HERO
+       ================================================================ */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 160px 40px 120px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      padding: 7px 18px 7px 10px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 16px rgba(60,42,34,0.06);
+    }
+    .hero-badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse-dot 2s ease-in-out infinite;
+      box-shadow: 0 0 8px rgba(47,107,71,0.4);
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 8px rgba(47,107,71,0.4); }
+      50% { opacity: 0.6; transform: scale(0.85); box-shadow: 0 0 4px rgba(47,107,71,0.2); }
+    }
+    .hero-badge span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--brun-soft);
+      letter-spacing: 0.3px;
+    }
+    .hero-text h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 60px;
+      line-height: 1.08;
+      font-style: italic;
+      color: var(--brun);
+      letter-spacing: -1.5px;
+    }
+    .hero-text h1 .highlight {
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(135deg, var(--rose) 0%, var(--or) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-text h1 .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--rose), var(--or));
+      opacity: 0.2;
+      border-radius: 2px;
+    }
+    .hero-subtitle {
+      margin-top: 28px;
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--gray);
+      max-width: 460px;
+      font-weight: 300;
+    }
+    .hero-trust {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-avatars {
+      display: flex;
+    }
+    .hero-avatars span {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--creme);
+      margin-left: -8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .hero-avatars span:first-child { margin-left: 0; }
+    .hero-avatars span:nth-child(1) { background: var(--rose); }
+    .hero-avatars span:nth-child(2) { background: var(--or); }
+    .hero-avatars span:nth-child(3) { background: var(--green); }
+    .hero-avatars span:nth-child(4) { background: var(--brun); }
+    .hero-trust-text {
+      font-size: 12px;
+      color: var(--gray);
+    }
+    .hero-trust-text strong { color: var(--brun); font-weight: 600; }
+
+    .hero-buttons {
+      margin-top: 40px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .btn-main {
+      position: relative;
+      background: var(--rose);
+      color: var(--white);
+      border: none;
+      padding: 18px 44px;
+      border-radius: 100px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+      overflow: hidden;
+    }
+    .btn-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.18));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-main:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 40px var(--rose-glow), 0 4px 12px rgba(196,98,106,0.2);
+    }
+    .btn-main:hover::before { opacity: 1; }
+    .btn-main:active { transform: translateY(0) scale(0.98); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--brun-soft);
+      border: 1.5px solid rgba(60,42,34,0.12);
+      padding: 16px 30px;
+      border-radius: 100px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-ghost:hover {
+      color: var(--rose);
+      border-color: var(--rose);
+      background: var(--rose-pale);
+    }
+    .btn-ghost svg { transition: transform 0.3s; }
+    .btn-ghost:hover svg { transform: translateX(3px); }
+
+    /* ---- PHONE MOCKUP ---- */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+    .phone-glow {
+      position: absolute;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--rose-glow) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: glow-breathe 4s ease-in-out infinite;
+    }
+    @keyframes glow-breathe {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.9; }
+    }
+    .phone-orb {
+      position: absolute;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .phone-orb-1 {
+      width: 80px; height: 80px;
+      background: radial-gradient(circle, var(--or-glow) 0%, transparent 70%);
+      top: 10%; right: 5%;
+      animation: orb-float-1 7s ease-in-out infinite;
+    }
+    .phone-orb-2 {
+      width: 60px; height: 60px;
+      background: radial-gradient(circle, var(--green-light) 0%, transparent 70%);
+      bottom: 15%; left: 10%;
+      animation: orb-float-2 9s ease-in-out infinite;
+    }
+    @keyframes orb-float-1 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-15px, 20px); }
+    }
+    @keyframes orb-float-2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(12px, -18px); }
+    }
+
+    .phone {
+      width: 280px; height: 570px;
+      background: var(--white);
+      border-radius: 44px;
+      box-shadow:
+        0 2px 4px rgba(60,42,34,0.03),
+        0 8px 24px rgba(60,42,34,0.06),
+        0 32px 80px rgba(60,42,34,0.1);
+      padding: 12px;
+      position: relative;
+      z-index: 2;
+      animation: phone-float 6s ease-in-out infinite;
+    }
+    @keyframes phone-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(0.5deg); }
+    }
+    .phone-notch {
+      width: 120px; height: 30px;
+      background: var(--white);
+      border-radius: 0 0 20px 20px;
+      position: absolute;
+      top: 12px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+    }
+    .phone-dynamic-island {
+      width: 90px; height: 22px;
+      background: #1a1a1a;
+      border-radius: 20px;
+      position: absolute;
+      top: 16px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 6;
+    }
+    .phone-screen {
+      width: 100%; height: 100%;
+      background: var(--creme);
+      border-radius: 34px;
+      padding: 50px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+    }
+    .phone-greeting {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: var(--brun);
+      padding: 0 4px;
+    }
+    .phone-sub {
+      font-size: 10px;
+      color: var(--gray);
+      padding: 0 4px;
+      margin-bottom: 6px;
+    }
+    .phone-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 14px;
+      transition: transform 0.3s;
+    }
+    .phone-card:hover { transform: scale(1.02); }
+    .phone-card-label {
+      font-size: 7px;
+      letter-spacing: 1.4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 5px;
+    }
+    .phone-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brun);
+    }
+    .phone-card-desc {
+      font-size: 10px;
+      color: var(--gray);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+    .phone-card-hero {
+      background: linear-gradient(135deg, var(--rose) 0%, var(--rose-light) 100%);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .phone-card-hero .phone-card-label { color: rgba(255,255,255,0.6); }
+    .phone-card-hero .phone-card-title {
+      color: var(--white);
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      font-weight: 400;
+    }
+    .phone-card-hero .phone-card-desc { color: rgba(255,255,255,0.5); }
+    .phone-progress {
+      height: 3px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    .phone-progress-fill {
+      height: 100%; width: 0%;
+      background: var(--white);
+      border-radius: 2px;
+      animation: progress-fill 2.5s 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes progress-fill { to { width: 65%; } }
+
+    .phone-card-coaching {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .coaching-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--or) 0%, var(--or-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .coaching-avatar svg { width: 14px; height: 14px; fill: var(--white); }
+
+    /* ---- Store badges ---- */
+    .hero-stores {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--brun);
+      color: var(--white);
+      padding: 10px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+    }
+    .store-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(60,42,34,0.2);
+    }
+    .store-badge svg { flex-shrink: 0; }
+    .store-badge-sub {
+      display: block;
+      font-size: 8px;
+      letter-spacing: 0.5px;
+      opacity: 0.6;
+      line-height: 1;
+    }
+    .store-badge-name {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    /* ================================================================
+       APP SCREENSHOTS
+       ================================================================ */
+    .screenshots {
+      padding: 120px 40px;
+      background: var(--white);
+      overflow: hidden;
+    }
+    .screenshots-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .screenshots-scroll {
+      display: flex;
+      gap: 20px;
+      margin-top: 52px;
+      padding-bottom: 20px;
+      overflow: hidden;
+      width: max-content;
+      animation: screenshots-marquee 65s linear infinite;
+    }
+    .screenshots-scroll:hover { animation-play-state: paused; }
+    @keyframes screenshots-marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .screenshot-item {
+      flex-shrink: 0;
+      scroll-snap-align: center;
+      width: 240px;
+      text-align: center;
+    }
+    .screenshot-phone {
+      width: 240px;
+      height: 480px;
+      background: var(--creme);
+      border-radius: 32px;
+      padding: 10px;
+      box-shadow:
+        0 2px 4px rgba(60,42,34,0.03),
+        0 8px 24px rgba(60,42,34,0.06),
+        0 20px 60px rgba(60,42,34,0.08);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .screenshot-item:hover .screenshot-phone {
+      transform: translateY(-8px);
+    }
+    .screenshot-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: var(--creme);
+      padding: 40px 12px 12px;
+      position: relative;
+    }
+    .screenshot-notch {
+      width: 76px;
+      height: 18px;
+      background: #1a1a1a;
+      border-radius: 14px;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    .screenshot-label {
+      margin-top: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brun);
+    }
+    .screenshot-desc {
+      font-size: 11px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+    /* Screenshot image inside phone frame */
+    .screenshot-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 24px;
+    }
+    .screenshot-inner.has-img {
+      padding: 0;
+    }
+
+    /* Phone with real screenshot (hero + showcases) */
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 34px;
+      margin-top: -36px;
+    }
+    .phone-screen.has-img {
+      padding: 0;
+      overflow: hidden;
+    }
+    .phone-screen.has-img img {
+      margin-top: 0;
+      border-radius: 34px;
+    }
+
+    /* ================================================================
+       FEATURE SHOWCASE — alternating phone + text
+       ================================================================ */
+    .showcase {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 40px;
+    }
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .showcase-grid.reverse .showcase-visual { order: 2; }
+    .showcase-grid.reverse .showcase-text { order: 1; }
+    .showcase-text .section-label { text-align: left; }
+    .showcase-text h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      font-style: italic;
+      line-height: 1.2;
+      color: var(--brun);
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .showcase-text p {
+      font-size: 16px;
+      color: var(--gray);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+    .showcase-checks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .showcase-checks li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--brun-soft);
+      font-weight: 400;
+    }
+    .showcase-checks li svg {
+      width: 18px;
+      height: 18px;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+    .showcase-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 28px;
+      background: var(--rose);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+    }
+    .showcase-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--rose-glow);
+    }
+    .showcase-cta svg { transition: transform 0.3s; }
+    .showcase-cta:hover svg { transform: translateX(3px); }
+    .showcase-visual {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+    .showcase-phone {
+      width: 260px;
+      height: 530px;
+      background: var(--white);
+      border-radius: 40px;
+      box-shadow:
+        0 2px 4px rgba(60,42,34,0.03),
+        0 8px 24px rgba(60,42,34,0.06),
+        0 32px 80px rgba(60,42,34,0.1);
+      padding: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .showcase-phone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 32px;
+    }
+    .showcase-phone-notch {
+      width: 80px;
+      height: 20px;
+      background: #1a1a1a;
+      border-radius: 16px;
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+    .showcase-glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    /* ================================================================
+       MID-PAGE CTA STRIP
+       ================================================================ */
+    .mid-cta {
+      padding: 60px 40px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--creme) 0%, rgba(196,98,106,0.04) 100%);
+      border-top: 1px solid rgba(60,42,34,0.04);
+      border-bottom: 1px solid rgba(60,42,34,0.04);
+    }
+    .mid-cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .mid-cta h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      font-style: italic;
+      color: var(--brun);
+      margin-bottom: 10px;
+    }
+    .mid-cta p {
+      font-size: 14px;
+      color: var(--gray);
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+
+    /* ================================================================
+       TRUST BANNER
+       ================================================================ */
+    .trust-banner {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 36px 40px;
+      background: var(--white);
+      border-bottom: 1px solid rgba(60,42,34,0.04);
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--gray);
+      font-weight: 400;
+    }
+    .trust-item svg {
+      width: 20px;
+      height: 20px;
+      color: var(--green);
+    }
+
+    /* ================================================================
+       MARQUEE
+       ================================================================ */
+    .marquee-section {
+      padding: 44px 0;
+      overflow: hidden;
+      border-top: 1px solid rgba(60,42,34,0.05);
+      border-bottom: 1px solid rgba(60,42,34,0.05);
+      background: var(--white);
+    }
+    .marquee {
+      display: flex;
+      gap: 48px;
+      animation: marquee-scroll 30s linear infinite;
+      width: max-content;
+    }
+    .marquee:hover { animation-play-state: paused; }
+    @keyframes marquee-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-item {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--gray-light);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      transition: color 0.3s;
+    }
+    .marquee-item:hover { color: var(--rose); }
+    .marquee-item::after {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gray-light);
+      opacity: 0.4;
+    }
+
+    /* ================================================================
+       SOCIAL PROOF STATS
+       ================================================================ */
+    .proof {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 40px 60px;
+    }
+    .proof-label {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      font-weight: 700;
+      color: var(--gray);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .proof-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .proof-stat {
+      text-align: center;
+      padding: 36px 20px;
+      background: var(--white);
+      border-radius: 24px;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+    }
+    .proof-stat:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(60,42,34,0.06);
+    }
+    .proof-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      font-style: italic;
+      color: var(--brun);
+      line-height: 1;
+    }
+    .proof-num .accent { color: var(--rose); }
+    .proof-desc {
+      font-size: 13px;
+      color: var(--gray);
+      margin-top: 10px;
+      font-weight: 400;
+    }
+
+    /* ================================================================
+       SECTION HELPERS
+       ================================================================ */
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      font-weight: 700;
+      color: var(--rose);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 44px;
+      font-style: italic;
+      text-align: center;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--gray);
+      font-size: 16px;
+      margin-top: 14px;
+      font-weight: 300;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    /* ================================================================
+       POUR QUI — persona cards
+       ================================================================ */
+    .pour-qui {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 40px;
+    }
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 52px;
+    }
+    .persona-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+    }
+    .persona-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .persona-card:nth-child(1)::before { background: linear-gradient(90deg, var(--rose), var(--rose-light)); }
+    .persona-card:nth-child(2)::before { background: linear-gradient(90deg, var(--or), var(--or-light)); }
+    .persona-card:nth-child(3)::before { background: linear-gradient(90deg, var(--green), #4A9B6A); }
+    .persona-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(60,42,34,0.08);
+    }
+    .persona-card:hover::before { opacity: 1; }
+    .persona-emoji {
+      font-size: 40px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .persona-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-style: italic;
+      margin-bottom: 10px;
+      color: var(--brun);
+    }
+    .persona-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .persona-tag {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .persona-card:nth-child(1) .persona-tag { background: var(--rose-pale); color: var(--rose); }
+    .persona-card:nth-child(2) .persona-tag { background: var(--or-glow); color: var(--or); }
+    .persona-card:nth-child(3) .persona-tag { background: var(--green-light); color: var(--green); }
+
+    /* ================================================================
+       FEATURES — bento grid
+       ================================================================ */
+    .features {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px 100px;
+    }
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+      margin-top: 52px;
+    }
+    .bento-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: default;
+    }
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rose), var(--or));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .bento-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(60,42,34,0.08);
+    }
+    .bento-card:hover::before { opacity: 1; }
+    .bento-wide { grid-column: span 2; }
+    .bento-icon {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+    .bi-rose { background: var(--rose-pale); color: var(--rose); }
+    .bi-or { background: var(--or-glow); color: var(--or); }
+    .bi-green { background: var(--green-light); color: var(--green); }
+    .bi-brun { background: rgba(60,42,34,0.05); color: var(--brun); }
+    .bento-icon svg { width: 24px; height: 24px; }
+    .bento-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    .bento-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .bento-tag {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 9px;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 100px;
+      text-transform: uppercase;
+    }
+    .bt-standard { background: var(--creme); color: var(--brun-soft); }
+    .bt-premium { background: var(--or-glow); color: var(--or); }
+
+    /* ================================================================
+       AVANT / APRES — comparison
+       ================================================================ */
+    .comparison {
+      padding: 120px 40px;
+      background: var(--white);
+    }
+    .comparison-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 40px;
+      align-items: stretch;
+      margin-top: 52px;
+    }
+    .comparison-col {
+      padding: 40px;
+      border-radius: 24px;
+    }
+    .col-avant {
+      background: var(--creme);
+    }
+    .col-apres {
+      background: linear-gradient(135deg, rgba(196,98,106,0.04) 0%, rgba(196,154,42,0.04) 100%);
+      border: 1px solid rgba(196,98,106,0.1);
+    }
+    .col-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .col-avant .col-label { color: var(--gray); }
+    .col-apres .col-label { color: var(--rose); }
+    .col-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(60,42,34,0.05);
+    }
+    .col-item:last-child { border-bottom: none; }
+    .col-item-icon {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .col-avant .col-item-icon {
+      background: rgba(138,128,120,0.1);
+      color: var(--gray);
+    }
+    .col-apres .col-item-icon {
+      background: var(--rose-pale);
+      color: var(--rose);
+    }
+    .col-item-icon svg { width: 12px; height: 12px; }
+    .col-item p {
+      font-size: 14px;
+      color: var(--brun-soft);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    .comparison-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .comparison-arrow {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--rose);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      box-shadow: 0 8px 24px var(--rose-glow);
+      animation: arrow-pulse 3s ease-in-out infinite;
+    }
+    @keyframes arrow-pulse {
+      0%, 100% { box-shadow: 0 8px 24px var(--rose-glow); }
+      50% { box-shadow: 0 8px 40px rgba(196,98,106,0.3); }
+    }
+    .comparison-arrow svg { width: 20px; height: 20px; }
+
+    /* ================================================================
+       PARCOURS — vertical timeline
+       ================================================================ */
+    .parcours {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 40px;
+    }
+    .timeline {
+      max-width: 640px;
+      margin: 52px auto 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 25px; bottom: 25px;
+      width: 2px;
+      background: var(--creme-dark);
+    }
+    .timeline-line-fill {
+      position: absolute;
+      left: 24px;
+      top: 25px;
+      width: 2px;
+      height: 0%;
+      background: linear-gradient(to bottom, var(--rose), var(--or), var(--green));
+      transition: height 0.1s;
+      z-index: 1;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 28px;
+      padding-bottom: 36px;
+      position: relative;
+      z-index: 3;
+    }
+    .timeline-num {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--creme-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--rose);
+      flex-shrink: 0;
+      z-index: 2;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .timeline-item:hover .timeline-num {
+      border-color: var(--rose);
+      background: var(--rose);
+      color: var(--white);
+      transform: scale(1.15);
+      box-shadow: 0 6px 20px var(--rose-glow);
+    }
+    .timeline-content {
+      padding-top: 12px;
+      flex: 1;
+    }
+    .timeline-content h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      letter-spacing: -0.2px;
+    }
+    .timeline-content p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ================================================================
+       TESTIMONIALS — grid
+       ================================================================ */
+    .testimonials {
+      padding: 120px 40px;
+      background: var(--white);
+    }
+    .testimonials-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 52px;
+    }
+    .testimonial-card {
+      background: var(--creme);
+      border-radius: 24px;
+      padding: 36px;
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(60,42,34,0.06);
+    }
+    .testimonial-card.featured {
+      background: linear-gradient(135deg, var(--brun) 0%, #5A3D32 100%);
+      grid-row: span 2;
+    }
+    .testimonial-card.featured .testimonial-text { color: rgba(255,255,255,0.85); }
+    .testimonial-card.featured .t-name { color: var(--white); }
+    .testimonial-card.featured .t-role { color: rgba(255,255,255,0.4); }
+    .testimonial-card.featured .t-stars { color: var(--or); }
+    .testimonial-card.featured .t-quote-mark { color: var(--rose); opacity: 0.3; }
+
+    .t-quote-mark {
+      font-family: 'DM Serif Display', serif;
+      font-size: 60px;
+      font-style: italic;
+      color: var(--rose);
+      opacity: 0.12;
+      line-height: 1;
+      margin-bottom: -12px;
+    }
+    .t-stars {
+      color: var(--or);
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .testimonial-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--brun-soft);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .testimonial-card.featured .testimonial-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .t-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .t-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .t-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brun);
+    }
+    .t-role {
+      font-size: 11px;
+      color: var(--gray);
+      margin-top: 1px;
+    }
+
+    /* ================================================================
+       PRICING — two cards
+       ================================================================ */
+    .pricing {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 40px;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 800px;
+      margin: 52px auto 0;
+    }
+    .pricing-card {
+      background: var(--white);
+      border-radius: 28px;
+      padding: 44px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(60,42,34,0.08);
+    }
+    .pricing-card.popular {
+      border: 2px solid var(--rose);
+    }
+    .pricing-popular-tag {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: var(--rose);
+      color: var(--white);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+    }
+    .pricing-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .pricing-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      font-style: italic;
+      color: var(--brun);
+      margin-bottom: 6px;
+    }
+    .pricing-price span {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      color: var(--gray);
+      font-weight: 400;
+    }
+    .pricing-desc {
+      font-size: 14px;
+      color: var(--gray);
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--brun-soft);
+      font-weight: 400;
+    }
+    .pricing-features li svg {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+    }
+    .pricing-features li .check { color: var(--green); }
+    .pricing-features li .lock { color: var(--gray-light); }
+    .pricing-features li.disabled {
+      color: var(--gray-light);
+    }
+
+    .btn-pricing {
+      width: 100%;
+      padding: 16px;
+      border-radius: 14px;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-pricing-outline {
+      background: transparent;
+      color: var(--brun);
+      border: 1.5px solid rgba(60,42,34,0.12);
+    }
+    .btn-pricing-outline:hover {
+      border-color: var(--brun);
+      background: var(--creme);
+    }
+    .btn-pricing-main {
+      background: var(--rose);
+      color: var(--white);
+    }
+    .btn-pricing-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--rose-glow);
+    }
+
+    /* ================================================================
+       FAQ — accordion
+       ================================================================ */
+    .faq {
+      padding: 120px 40px;
+      background: var(--white);
+    }
+    .faq-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .faq-list {
+      margin-top: 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .faq-item {
+      border-radius: 16px;
+      background: var(--creme);
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .faq-item.open { background: var(--creme); }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 24px;
+      cursor: pointer;
+      user-select: none;
+      gap: 16px;
+    }
+    .faq-question h4 {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--brun);
+      line-height: 1.4;
+    }
+    .faq-icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--rose);
+      color: var(--white);
+    }
+    .faq-icon svg { width: 14px; height: 14px; }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  padding 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 24px 24px;
+    }
+    .faq-answer p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ================================================================
+       CTA BOTTOM
+       ================================================================ */
+    .cta-section {
+      padding: 140px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--brun) 0%, #5A3D32 40%, var(--rose) 100%);
+      z-index: 0;
+    }
+    .cta-bg .cta-orb {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .cta-orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(196,98,106,0.15) 0%, transparent 70%);
+      top: -200px; right: -200px;
+      animation: cta-orb 10s ease-in-out infinite;
+    }
+    .cta-orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(196,154,42,0.1) 0%, transparent 70%);
+      bottom: -150px; left: -100px;
+      animation: cta-orb2 12s ease-in-out infinite;
+    }
+    .cta-orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(47,107,71,0.08) 0%, transparent 70%);
+      top: 30%; left: 20%;
+      animation: cta-orb3 8s ease-in-out infinite;
+    }
+    @keyframes cta-orb {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-50px, 50px); }
+    }
+    @keyframes cta-orb2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(40px, -40px); }
+    }
+    @keyframes cta-orb3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(20px, 20px) scale(1.1); }
+    }
+    .cta-content { position: relative; z-index: 1; }
+    .cta-content h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+    .cta-content p {
+      color: rgba(255,255,255,0.45);
+      font-size: 16px;
+      margin-top: 18px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--brun);
+      border: none;
+      padding: 20px 48px;
+      border-radius: 100px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 40px;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+      letter-spacing: 0.3px;
+    }
+    .btn-cta:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    }
+    .btn-cta:active { transform: translateY(0) scale(0.98); }
+    .btn-cta svg { transition: transform 0.3s; }
+    .btn-cta:hover svg { transform: translateX(4px); }
+
+    .cta-stores {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .cta-store-badge {
+      background: var(--white) !important;
+      color: var(--brun) !important;
+    }
+    .cta-store-badge .store-badge-sub { color: var(--gray); }
+    .cta-store-badge .store-badge-name { color: var(--brun); }
+    .cta-store-badge:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2) !important;
+    }
+    .cta-note {
+      color: rgba(255,255,255,0.3);
+      font-size: 12px;
+      margin-top: 20px;
+      font-weight: 400;
+    }
+
+    /* ================================================================
+       FOOTER
+       ================================================================ */
+    footer {
+      background: var(--brun);
+      color: rgba(255,255,255,0.5);
+      padding: 80px 40px 40px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-brand .logo {
+      color: var(--rose-light);
+      font-size: 24px;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .footer-brand p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.35);
+      max-width: 280px;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .footer-socials a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.4);
+      transition: background 0.3s, color 0.3s;
+    }
+    .footer-socials a:hover {
+      background: var(--rose);
+      color: var(--white);
+    }
+    .footer-col h5 {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 20px;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      margin-bottom: 12px;
+      transition: color 0.3s;
+    }
+    .footer-col a:hover { color: var(--rose-light); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+    }
+    .footer-bottom p {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+    }
+    .footer-bottom a {
+      color: var(--rose-light);
+      text-decoration: none;
+      font-size: 11px;
+    }
+
+    /* ================================================================
+       BACK TO TOP
+       ================================================================ */
+    .back-to-top {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid rgba(60,42,34,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 90;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s, transform 0.4s, box-shadow 0.3s;
+      box-shadow: 0 4px 16px rgba(60,42,34,0.08);
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .back-to-top:hover {
+      box-shadow: 0 8px 24px rgba(60,42,34,0.12);
+      transform: translateY(-2px);
+    }
+    .back-to-top svg { width: 18px; height: 18px; color: var(--brun); }
+
+    /* ================================================================
+       RESPONSIVE
+       ================================================================ */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 130px 24px 60px;
+        gap: 48px;
+        text-align: center;
+        min-height: auto;
+      }
+      .hero-text h1 { font-size: 40px; letter-spacing: -1px; }
+      .hero-subtitle { margin-left: auto; margin-right: auto; font-size: 15px; }
+      .hero-buttons { justify-content: center; flex-wrap: wrap; }
+      .hero-badge { margin-left: auto; margin-right: auto; }
+      .hero-trust { justify-content: center; }
+      .hero-visual { margin-top: 0; }
+      .hero-stores { justify-content: center; }
+      .phone { width: 240px; height: 490px; }
+      .phone-notch { width: 100px; height: 24px; }
+      .phone-dynamic-island { width: 76px; height: 18px; }
+      .phone-screen { padding: 44px 12px 12px; }
+
+      .proof-stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .proof-num { font-size: 38px; }
+      .proof { padding: 60px 24px 40px; }
+
+      .persona-grid { grid-template-columns: 1fr; }
+      .pour-qui { padding: 60px 24px; }
+
+      .bento { grid-template-columns: 1fr; }
+      .bento-wide { grid-column: span 1; }
+      .features { padding: 40px 24px 60px; }
+
+      .comparison-grid { grid-template-columns: 1fr; gap: 20px; }
+      .comparison-divider { transform: rotate(90deg); }
+      .comparison { padding: 80px 24px; }
+
+      .section-title { font-size: 32px; }
+
+      .parcours { padding: 80px 24px; }
+
+      .testimonials { padding: 80px 24px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .testimonial-card.featured { grid-row: span 1; }
+
+      .pricing { padding: 80px 24px; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+
+      .faq { padding: 80px 24px; }
+
+      .screenshots { padding: 80px 24px; }
+
+      .showcase { padding: 60px 24px; }
+      .showcase-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .showcase-grid.reverse .showcase-visual { order: -1; }
+      .showcase-grid.reverse .showcase-text { order: 2; }
+      .showcase-text .section-label { text-align: center; }
+      .showcase-text h3 { font-size: 28px; }
+      .showcase-phone { width: 220px; height: 448px; }
+      .mid-cta { padding: 48px 24px; }
+      .mid-cta h3 { font-size: 24px; }
+      .trust-banner { gap: 20px; padding: 28px 24px; }
+
+      .cta-section { padding: 80px 24px; }
+      .cta-content h2 { font-size: 34px; }
+      .cta-stores { flex-direction: column; align-items: center; }
+
+      .nav-inner { padding: 14px 20px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .menu-btn { display: block; }
+
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: span 2; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-text h1 { font-size: 34px; }
+      .proof-stats { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CURSOR GLOW -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" aria-label="Retour en haut">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+  </button>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">NAYHA</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#pour-qui">Pour qui</a>
+        <a href="#features">Fonctionnalités</a>
+        <a href="#app">L'app</a>
+        <a href="#parcours">Parcours</a>
+        <a href="#pricing">Tarifs</a>
+        <a href="#faq">FAQ</a>
+        <a href="#pricing" class="nav-cta">Commencer</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#pour-qui">Pour qui</a>
+    <a href="#features">Fonctionnalités</a>
+    <a href="#app">L'app</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#pricing">Tarifs</a>
+    <a href="#faq">FAQ</a>
+    <a href="#pricing" class="mobile-menu-cta">Commencer gratuitement</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-text">
+      <div class="hero-badge reveal">
+        <div class="hero-badge-dot"></div>
+        <span>Disponible sur iOS &amp; Android</span>
+      </div>
+      <h1 class="reveal d1">
+        Reprends ta vie pro<br>
+        <span class="highlight">en main.</span>
+      </h1>
+      <p class="hero-subtitle reveal d2">
+        Bilan, CV optimisé, simulation d'entretien, coaching — tout ce qu'il faut pour décrocher un emploi. À ton rythme. Sans jugement. Avec une IA qui comprend ton parcours.
+      </p>
+      <div class="hero-trust reveal d3">
+        <div class="hero-avatars">
+          <span>S</span><span>A</span><span>F</span><span>+</span>
+        </div>
+        <div class="hero-trust-text"><strong>+200 femmes</strong> ont déjà commencé leur parcours</div>
+      </div>
+      <div class="hero-buttons reveal d4">
+        <button class="btn-main" onclick="window.location.href='#pricing'">Commencer gratuitement</button>
+        <button class="btn-ghost" onclick="document.getElementById('app').scrollIntoView({behavior:'smooth'})">
+          Voir l'app
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div class="hero-stores reveal d5">
+        <a href="#" class="store-badge" aria-label="App Store">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div>
+            <span class="store-badge-sub">Disponible sur</span>
+            <span class="store-badge-name">App Store</span>
+          </div>
+        </a>
+        <a href="#" class="store-badge" aria-label="Google Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 010 1.38l-2.302 2.302L15.396 13l2.302-2.492zM5.864 2.658L16.8 9.99l-2.302 2.302L5.864 3.658z"/></svg>
+          <div>
+            <span class="store-badge-sub">Disponible sur</span>
+            <span class="store-badge-name">Google Play</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual reveal d5">
+      <div class="phone-glow"></div>
+      <div class="phone-orb phone-orb-1"></div>
+      <div class="phone-orb phone-orb-2"></div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-dynamic-island"></div>
+        <div class="phone-screen has-img">
+          <img src="screenshots/hub page.png" alt="NAYHA — Tableau de bord" loading="eager">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee" id="marquee">
+      <span class="marquee-item">Bilan de compétences</span>
+      <span class="marquee-item">Générateur de CV</span>
+      <span class="marquee-item">Coaching confiance</span>
+      <span class="marquee-item">Simulation entretien</span>
+      <span class="marquee-item">Analyse d'offres</span>
+      <span class="marquee-item">Optimisation LinkedIn</span>
+      <span class="marquee-item">Suivi candidatures</span>
+      <span class="marquee-item">Lettre de motivation</span>
+      <span class="marquee-item">Bilan de compétences</span>
+      <span class="marquee-item">Générateur de CV</span>
+      <span class="marquee-item">Coaching confiance</span>
+      <span class="marquee-item">Simulation entretien</span>
+      <span class="marquee-item">Analyse d'offres</span>
+      <span class="marquee-item">Optimisation LinkedIn</span>
+      <span class="marquee-item">Suivi candidatures</span>
+      <span class="marquee-item">Lettre de motivation</span>
+    </div>
+  </div>
+
+  <!-- SOCIAL PROOF STATS -->
+  <section class="proof">
+    <div class="proof-label reveal">NAYHA en chiffres</div>
+    <div class="proof-stats">
+      <div class="proof-stat reveal d1">
+        <div class="proof-num"><span class="counter" data-target="8">0</span></div>
+        <div class="proof-desc">étapes structurées</div>
+      </div>
+      <div class="proof-stat reveal d2">
+        <div class="proof-num"><span class="counter" data-target="100" data-suffix="%">0</span></div>
+        <div class="proof-desc">à ton rythme</div>
+      </div>
+      <div class="proof-stat reveal d3">
+        <div class="proof-num"><span class="counter" data-target="0">0</span></div>
+        <div class="proof-desc">jugement</div>
+      </div>
+      <div class="proof-stat reveal d4">
+        <div class="proof-num"><span class="counter" data-target="24" data-suffix="/7">0</span></div>
+        <div class="proof-desc">coaching disponible</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POUR QUI -->
+  <section class="pour-qui" id="pour-qui">
+    <div class="section-label reveal">Pour qui</div>
+    <h2 class="section-title reveal d1">Tu te reconnais ?<br>NAYHA est fait pour toi.</h2>
+    <p class="section-sub reveal d2">Peu importe d'où tu pars — NAYHA t'accompagne là où tu veux aller.</p>
+
+    <div class="persona-grid">
+      <div class="persona-card reveal d1">
+        <span class="persona-emoji">🌱</span>
+        <h3>En reconversion</h3>
+        <p>Tu veux changer de métier mais tu ne sais pas par où commencer. NAYHA t'aide à identifier tes compétences transférables et le métier qui te correspond.</p>
+        <span class="persona-tag">Parcours complet</span>
+      </div>
+      <div class="persona-card reveal d2">
+        <span class="persona-emoji">🏠</span>
+        <h3>Après une pause</h3>
+        <p>Tu as mis ta carrière entre parenthèses — enfants, santé, projet personnel. NAYHA valorise ton expérience et t'accompagne sans pression.</p>
+        <span class="persona-tag">À ton rythme</span>
+      </div>
+      <div class="persona-card reveal d3">
+        <span class="persona-emoji">🎯</span>
+        <h3>En recherche active</h3>
+        <p>Tu sais ce que tu veux mais les candidatures n'aboutissent pas. NAYHA optimise ton CV, tes lettres et ta préparation entretien.</p>
+        <span class="persona-tag">Booster</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="section-label reveal">Fonctionnalités</div>
+    <h2 class="section-title reveal d1">Chaque outil existe<br>pour un résultat.</h2>
+    <p class="section-sub reveal d2">Pas de fonctionnalités inutiles. Chaque écran t'aide à avancer concrètement vers l'emploi.</p>
+
+    <div class="bento">
+      <div class="bento-card bento-wide reveal">
+        <div class="bento-icon bi-rose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4"/><path d="M12 16V8"/></svg>
+        </div>
+        <h3>Bilan de compétences</h3>
+        <p>Identifie tes forces, tes envies et le métier qui te correspond vraiment. Un bilan guidé, pas un questionnaire générique.</p>
+        <span class="bento-tag bt-standard">Standard</span>
+      </div>
+      <div class="bento-card reveal d1">
+        <div class="bento-icon bi-or">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+        </div>
+        <h3>Générateur de CV</h3>
+        <p>CV global ou ciblé sur une offre. Optimisé ATS. Export PDF.</p>
+        <span class="bento-tag bt-standard">Standard</span>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-icon bi-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Coaching confiance</h3>
+        <p>Un espace bienveillant pour traverser les moments difficiles du parcours.</p>
+        <span class="bento-tag bt-standard">Standard</span>
+      </div>
+      <div class="bento-card reveal d1">
+        <div class="bento-icon bi-brun">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </div>
+        <h3>Analyse d'offres</h3>
+        <p>Colle 3 offres. NAYHA compare avec ton profil et identifie tes atouts et tes lacunes.</p>
+        <span class="bento-tag bt-standard">Standard</span>
+      </div>
+      <div class="bento-card reveal d2">
+        <div class="bento-icon bi-or">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <h3>Optimisation LinkedIn</h3>
+        <p>3 versions de titre, résumé optimisé. Ton profil devient visible par les recruteurs.</p>
+        <span class="bento-tag bt-premium">Premium</span>
+      </div>
+      <div class="bento-card bento-wide reveal d2">
+        <div class="bento-icon bi-rose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+        </div>
+        <h3>Simulation d'entretien</h3>
+        <p>6 questions réalistes dont 3 difficiles. Feedback immédiat après chaque réponse. Score global et 3 points clés à travailler.</p>
+        <span class="bento-tag bt-premium">Premium</span>
+      </div>
+      <div class="bento-card reveal d3">
+        <div class="bento-icon bi-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
+        </div>
+        <h3>Suivi candidatures</h3>
+        <p>Tableau de bord de tes candidatures. Statuts, relances, entretiens — tout est organisé.</p>
+        <span class="bento-tag bt-standard">Standard</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP SCREENSHOTS -->
+  <section class="screenshots" id="app">
+    <div class="screenshots-inner">
+      <div class="section-label reveal">L'app en action</div>
+      <h2 class="section-title reveal d1">Voilà ce qui t'attend<br>à l'intérieur.</h2>
+      <p class="section-sub reveal d2">Une interface pensée pour toi — claire, chaleureuse, et qui va droit au but.</p>
+
+      <div class="screenshots-scroll">
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/auth.png" alt="Inscription" loading="lazy"></div></div><div class="screenshot-label">Inscription</div><div class="screenshot-desc">Crée ton compte en 30 secondes</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/image.png" alt="Choix métier" loading="lazy"></div></div><div class="screenshot-label">Choix métier</div><div class="screenshot-desc">Trouve ta voie professionnelle</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/evaluation.png" alt="Évaluation" loading="lazy"></div></div><div class="screenshot-label">Évaluation</div><div class="screenshot-desc">Valide ton adéquation métier</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/hub page.png" alt="Tableau de bord" loading="lazy"></div></div><div class="screenshot-label">Tableau de bord</div><div class="screenshot-desc">Ton parcours en un coup d'oeil</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/analyse.png" alt="Analyse d'offres" loading="lazy"></div></div><div class="screenshot-label">Analyse d'offres</div><div class="screenshot-desc">Compare ton profil au marché</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/linkedin.png" alt="LinkedIn" loading="lazy"></div></div><div class="screenshot-label">LinkedIn</div><div class="screenshot-desc">Profil optimisé pour les recruteurs</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/CV generator.png" alt="Générateur de CV" loading="lazy"></div></div><div class="screenshot-label">Générateur de CV</div><div class="screenshot-desc">Expériences, compétences, langues</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/motivation-letter.png" alt="Lettre de motivation" loading="lazy"></div></div><div class="screenshot-label">Lettre de motivation</div><div class="screenshot-desc">Générée et personnalisée</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/candidatures.png" alt="Candidatures" loading="lazy"></div></div><div class="screenshot-label">Candidatures</div><div class="screenshot-desc">Suivi structuré avec relances</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/relancer.png" alt="Relances" loading="lazy"></div></div><div class="screenshot-label">Relances</div><div class="screenshot-desc">E-mails de suivi générés</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/offer evalution.png" alt="Évaluation offre" loading="lazy"></div></div><div class="screenshot-label">Décision offre</div><div class="screenshot-desc">Aide à la négociation</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/semulation entretien.png" alt="Simulation entretien" loading="lazy"></div></div><div class="screenshot-label">Simulation</div><div class="screenshot-desc">Prépare-toi avec l'IA</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/semuler.png" alt="Entretien" loading="lazy"></div></div><div class="screenshot-label">Entretien</div><div class="screenshot-desc">Questions réalistes + feedback</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/coaching.png" alt="Coaching" loading="lazy"></div></div><div class="screenshot-label">Coaching</div><div class="screenshot-desc">Un espace bienveillant pour avancer</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/videos.png" alt="Ateliers vidéo" loading="lazy"></div></div><div class="screenshot-label">Ateliers vidéo</div><div class="screenshot-desc">Techniques de recherche d'emploi</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/communaute.png" alt="Communauté" loading="lazy"></div></div><div class="screenshot-label">Communauté</div><div class="screenshot-desc">Partage et encouragements</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/bilan-monthly.png" alt="Bilan mensuel" loading="lazy"></div></div><div class="screenshot-label">Bilan mensuel</div><div class="screenshot-desc">Suivi de ta progression</div></div>
+        <!-- duplicate for seamless loop -->
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/auth.png" alt="Inscription" loading="lazy"></div></div><div class="screenshot-label">Inscription</div><div class="screenshot-desc">Crée ton compte en 30 secondes</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/image.png" alt="Choix métier" loading="lazy"></div></div><div class="screenshot-label">Choix métier</div><div class="screenshot-desc">Trouve ta voie professionnelle</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/evaluation.png" alt="Évaluation" loading="lazy"></div></div><div class="screenshot-label">Évaluation</div><div class="screenshot-desc">Valide ton adéquation métier</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/hub page.png" alt="Tableau de bord" loading="lazy"></div></div><div class="screenshot-label">Tableau de bord</div><div class="screenshot-desc">Ton parcours en un coup d'oeil</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/analyse.png" alt="Analyse d'offres" loading="lazy"></div></div><div class="screenshot-label">Analyse d'offres</div><div class="screenshot-desc">Compare ton profil au marché</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/linkedin.png" alt="LinkedIn" loading="lazy"></div></div><div class="screenshot-label">LinkedIn</div><div class="screenshot-desc">Profil optimisé pour les recruteurs</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/CV generator.png" alt="Générateur de CV" loading="lazy"></div></div><div class="screenshot-label">Générateur de CV</div><div class="screenshot-desc">Expériences, compétences, langues</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/motivation-letter.png" alt="Lettre de motivation" loading="lazy"></div></div><div class="screenshot-label">Lettre de motivation</div><div class="screenshot-desc">Générée et personnalisée</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/candidatures.png" alt="Candidatures" loading="lazy"></div></div><div class="screenshot-label">Candidatures</div><div class="screenshot-desc">Suivi structuré avec relances</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/relancer.png" alt="Relances" loading="lazy"></div></div><div class="screenshot-label">Relances</div><div class="screenshot-desc">E-mails de suivi générés</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/offer evalution.png" alt="Évaluation offre" loading="lazy"></div></div><div class="screenshot-label">Décision offre</div><div class="screenshot-desc">Aide à la négociation</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/semulation entretien.png" alt="Simulation entretien" loading="lazy"></div></div><div class="screenshot-label">Simulation</div><div class="screenshot-desc">Prépare-toi avec l'IA</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/semuler.png" alt="Entretien" loading="lazy"></div></div><div class="screenshot-label">Entretien</div><div class="screenshot-desc">Questions réalistes + feedback</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/coaching.png" alt="Coaching" loading="lazy"></div></div><div class="screenshot-label">Coaching</div><div class="screenshot-desc">Un espace bienveillant pour avancer</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/videos.png" alt="Ateliers vidéo" loading="lazy"></div></div><div class="screenshot-label">Ateliers vidéo</div><div class="screenshot-desc">Techniques de recherche d'emploi</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/communaute.png" alt="Communauté" loading="lazy"></div></div><div class="screenshot-label">Communauté</div><div class="screenshot-desc">Partage et encouragements</div></div>
+        <div class="screenshot-item"><div class="screenshot-phone"><div class="screenshot-inner has-img"><img src="screenshots/bilan-monthly.png" alt="Bilan mensuel" loading="lazy"></div></div><div class="screenshot-label">Bilan mensuel</div><div class="screenshot-desc">Suivi de ta progression</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BANNER -->
+  <div class="trust-banner reveal">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Données chiffrées RGPD
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Aucune carte bancaire requise
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+      iOS &amp; Android
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+      IA conversationnelle intégrée
+    </div>
+  </div>
+
+  <!-- SHOWCASE 1: Bilan de compétences -->
+  <section class="showcase">
+    <div class="showcase-grid reveal">
+      <div class="showcase-visual reveal-left">
+        <div class="showcase-glow" style="background: radial-gradient(circle, var(--rose-glow) 0%, transparent 70%);"></div>
+        <div class="showcase-phone">
+          <div class="showcase-phone-notch"></div>
+          <img src="screenshots/image.png" alt="Plan d'Action NAYHA" loading="lazy">
+        </div>
+      </div>
+      <div class="showcase-text reveal-right">
+        <div class="section-label">Étape clé</div>
+        <h3>Comprends enfin tes forces — et le métier qui va avec.</h3>
+        <p>Le bilan de compétences NAYHA n'est pas un questionnaire générique. C'est un dialogue guidé qui identifie tes forces cachées, tes envies profondes, et te propose le métier qui te correspond vraiment.</p>
+        <ul class="showcase-checks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Diagnostic personnalisé vie + pro</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Métier suggéré avec score de correspondance</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Compétences transférables identifiées</li>
+        </ul>
+        <a href="#pricing" class="showcase-cta">
+          Faire mon bilan
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE 2: CV + Simulation -->
+  <section class="showcase" style="background: var(--white);">
+    <div class="showcase-grid reverse reveal">
+      <div class="showcase-visual reveal-right">
+        <div class="showcase-glow" style="background: radial-gradient(circle, var(--or-glow) 0%, transparent 70%);"></div>
+        <div class="showcase-phone">
+          <div class="showcase-phone-notch"></div>
+          <img src="screenshots/CV generator.png" alt="Générateur de CV NAYHA" loading="lazy">
+        </div>
+      </div>
+      <div class="showcase-text reveal-left">
+        <div class="section-label">Outils concrets</div>
+        <h3>Un CV qui passe les filtres. Une préparation qui fait la différence.</h3>
+        <p>Ton CV est généré automatiquement à partir de ton bilan. Optimisé pour les filtres ATS que les recruteurs utilisent. Score de lisibilité en temps réel. Et quand tu décroches un entretien, la simulation IA te prépare avec des questions réalistes.</p>
+        <ul class="showcase-checks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> CV ciblé par offre, score ATS</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> 6 questions d'entretien + feedback immédiat</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Export PDF prêt à envoyer</li>
+        </ul>
+        <a href="#pricing" class="showcase-cta">
+          Générer mon CV
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE 3: Coaching -->
+  <section class="showcase">
+    <div class="showcase-grid reveal">
+      <div class="showcase-visual reveal-left">
+        <div class="showcase-glow" style="background: radial-gradient(circle, var(--green-light) 0%, transparent 70%);"></div>
+        <div class="showcase-phone">
+          <div class="showcase-phone-notch"></div>
+          <img src="screenshots/coaching.png" alt="Coaching confiance NAYHA" loading="lazy">
+        </div>
+      </div>
+      <div class="showcase-text reveal-right">
+        <div class="section-label">Soutien</div>
+        <h3>Un coaching qui comprend ce que tu traverses.</h3>
+        <p>Reprendre une activité professionnelle, c'est aussi affronter le doute, la peur de ne pas être à la hauteur. Le coaching NAYHA t'écoute, te rassure et te donne des clés concrètes pour avancer sereinement.</p>
+        <ul class="showcase-checks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Disponible 24h/24, 7j/7</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Conversations bienveillantes et adaptées</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Techniques concrètes de gestion du stress</li>
+        </ul>
+        <a href="#pricing" class="showcase-cta">
+          Démarrer le coaching
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID-PAGE CTA -->
+  <div class="mid-cta reveal">
+    <div class="mid-cta-inner">
+      <h3>Prête à faire le premier pas ?</h3>
+      <p>Commence par le bilan de compétences — c'est gratuit, ça prend 10 minutes, et ça peut tout changer.</p>
+      <a href="#pricing" class="btn-main" style="text-decoration:none;display:inline-block;">Commencer maintenant</a>
+    </div>
+  </div>
+
+  <!-- AVANT / APRÈS -->
+  <section class="comparison">
+    <div class="comparison-inner">
+      <div class="section-label reveal">La différence</div>
+      <h2 class="section-title reveal d1">Chercher seule vs.<br>être accompagnée.</h2>
+      <p class="section-sub reveal d2">Même parcours, deux réalités. Laquelle tu choisis ?</p>
+
+      <div class="comparison-grid">
+        <div class="comparison-col col-avant reveal-left d1">
+          <div class="col-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+            Sans accompagnement
+          </div>
+          <div class="col-item">
+            <div class="col-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></div>
+            <p>CV copié-collé, rejeté par les filtres ATS</p>
+          </div>
+          <div class="col-item">
+            <div class="col-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></div>
+            <p>Candidatures dans le vide, sans suivi</p>
+          </div>
+          <div class="col-item">
+            <div class="col-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></div>
+            <p>Entretiens stressants, sans préparation</p>
+          </div>
+          <div class="col-item">
+            <div class="col-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></div>
+            <p>Perte de confiance progressive</p>
+          </div>
+        </div>
+
+        <div class="comparison-divider reveal-scale d2">
+          <div class="comparison-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+
+        <div class="comparison-col col-apres reveal-right d3">
+          <div class="col-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Avec NAYHA
+          </div>
+          <div class="col-item">
+            <div class="col-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <p>CV optimisé ATS, ciblé par offre, score 87/100</p>
+          </div>
+          <div class="col-item">
+            <div class="col-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <p>Suivi candidatures structuré avec relances</p>
+          </div>
+          <div class="col-item">
+            <div class="col-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <p>Simulation réaliste avec feedback immédiat</p>
+          </div>
+          <div class="col-item">
+            <div class="col-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <p>Coaching bienveillant à chaque étape</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARCOURS -->
+  <section class="parcours" id="parcours">
+    <div class="section-label reveal">Parcours</div>
+    <h2 class="section-title reveal d1">8 étapes.<br>De « je ne sais pas » à « j'ai trouvé ».</h2>
+    <p class="section-sub reveal d2">Un chemin clair du bilan à l'emploi. Tu avances quand tu veux — chaque étape t'amène plus près du but.</p>
+
+    <div class="timeline" id="timeline">
+      <div class="timeline-line-fill" id="timelineFill"></div>
+      <div class="timeline-item reveal">
+        <div class="timeline-num">1</div>
+        <div class="timeline-content">
+          <h4>Bilan de compétences</h4>
+          <p>Identifier tes forces, tes envies et ce qui te motive</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal d1">
+        <div class="timeline-num">2</div>
+        <div class="timeline-content">
+          <h4>Fiche métier</h4>
+          <p>Découvrir le métier qui te correspond vraiment</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal d2">
+        <div class="timeline-num">3</div>
+        <div class="timeline-content">
+          <h4>Évaluation d'adéquation</h4>
+          <p>Vérifier la correspondance entre ton profil et le métier</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-num">4</div>
+        <div class="timeline-content">
+          <h4>Analyse du marché</h4>
+          <p>Confronter ton profil à 3 offres réelles</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal d1">
+        <div class="timeline-num">5</div>
+        <div class="timeline-content">
+          <h4>Profil LinkedIn</h4>
+          <p>Optimiser ta visibilité avec 3 versions de titre</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal d2">
+        <div class="timeline-num">6</div>
+        <div class="timeline-content">
+          <h4>CV &amp; Lettre</h4>
+          <p>Générer un CV ATS et une lettre ciblée</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-num">7</div>
+        <div class="timeline-content">
+          <h4>Candidatures</h4>
+          <p>Candidater à ton rythme avec un suivi structuré</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal d1">
+        <div class="timeline-num">8</div>
+        <div class="timeline-content">
+          <h4>Simulation</h4>
+          <p>T'entraîner avec des questions réalistes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="section-label reveal">Elles l'ont fait</div>
+      <h2 class="section-title reveal d1">Elles étaient à ta place.<br>Regarde où elles en sont.</h2>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card featured reveal d1">
+          <div class="t-quote-mark">"</div>
+          <div class="t-stars">★★★★★</div>
+          <p class="testimonial-text">J'avais arrêté de travailler pendant 8 ans. NAYHA m'a aidée à comprendre que mon expérience avait de la valeur — et à le montrer aux recruteurs.</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background: linear-gradient(135deg, var(--rose) 0%, var(--rose-light) 100%);">S</div>
+            <div>
+              <div class="t-name">Sarah M.</div>
+              <div class="t-role">Coordinatrice médico-sociale</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal d2">
+          <div class="t-quote-mark">"</div>
+          <div class="t-stars">★★★★★</div>
+          <p class="testimonial-text">La simulation d'entretien m'a permis d'arriver confiante. J'ai eu le poste dès le premier essai.</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background: linear-gradient(135deg, var(--or) 0%, var(--or-light) 100%);">A</div>
+            <div>
+              <div class="t-name">Amina K.</div>
+              <div class="t-role">Assistante administrative</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal d3">
+          <div class="t-quote-mark">"</div>
+          <div class="t-stars">★★★★★</div>
+          <p class="testimonial-text">Le bilan m'a fait réaliser que je pouvais changer de secteur. Mon CV a été retenu 3 fois en 2 semaines.</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background: linear-gradient(135deg, var(--green) 0%, #4A9B6A 100%);">F</div>
+            <div>
+              <div class="t-name">Fatima R.</div>
+              <div class="t-role">Aide-soignante en reconversion</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal d4">
+          <div class="t-quote-mark">"</div>
+          <div class="t-stars">★★★★★</div>
+          <p class="testimonial-text">Pas de jugement, pas de pression. NAYHA m'a accompagnée à mon rythme, et ça a tout changé.</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background: linear-gradient(135deg, var(--brun) 0%, var(--brun-soft) 100%);">N</div>
+            <div>
+              <div class="t-name">Nadia B.</div>
+              <div class="t-role">En recherche active</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal d5">
+          <div class="t-quote-mark">"</div>
+          <div class="t-stars">★★★★★</div>
+          <p class="testimonial-text">Le CV généré par NAYHA a passé les filtres ATS du premier coup. En 3 semaines, j'avais 2 entretiens.</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background: linear-gradient(135deg, var(--rose-light) 0%, var(--or) 100%);">L</div>
+            <div>
+              <div class="t-name">Leila D.</div>
+              <div class="t-role">Assistante RH</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="section-label reveal">Tarifs</div>
+    <h2 class="section-title reveal d1">Choisis ton offre.<br>Avance à ton rythme.</h2>
+    <p class="section-sub reveal d2">Sans engagement. Tu peux changer ou annuler à tout moment.</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card reveal d1">
+        <h3>Standard</h3>
+        <div class="pricing-price">9,99€ <span>/mois</span></div>
+        <p class="pricing-desc">Sans engagement</p>
+        <ul class="pricing-features">
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Diagnostic Vie &amp; Professionnel</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Portrait de Force &amp; Plan d'Action</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Les 4 assistants IA</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Défi hebdomadaire &amp; communauté</li>
+        </ul>
+        <button class="btn-pricing btn-pricing-outline">Choisir Standard</button>
+      </div>
+      <div class="pricing-card popular reveal d2">
+        <div class="pricing-popular-tag">Populaire</div>
+        <h3>Premium</h3>
+        <div class="pricing-price">24,99€ <span>/mois</span></div>
+        <p class="pricing-desc">Facturation séparée</p>
+        <ul class="pricing-features">
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Tout le plan Standard</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Sessions de coaching mensuel thématique</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Places limitées, inscription requise</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Accès aux replays &amp; ressources exclusives</li>
+        </ul>
+        <button class="btn-pricing btn-pricing-main">Choisir Premium</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="faq-inner">
+      <div class="section-label reveal">FAQ</div>
+      <h2 class="section-title reveal d1">Tu hésites encore ?<br>On répond à tout.</h2>
+
+      <div class="faq-list">
+        <div class="faq-item reveal d1">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h4>Combien coûte NAYHA ?</h4>
+            <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>L'offre Standard est à 9,99€/mois sans engagement. Elle inclut le diagnostic complet, le Portrait de Force, les 4 assistants IA et le défi hebdomadaire. L'offre Premium à 24,99€/mois ajoute des sessions de coaching mensuel thématique et l'accès aux replays exclusifs.</p></div>
+        </div>
+        <div class="faq-item reveal d2">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h4>À qui s'adresse NAYHA ?</h4>
+            <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>NAYHA est conçu pour toute personne en recherche d'emploi ou en reconversion. L'app est particulièrement adaptée aux femmes qui reprennent une activité après une pause (parentalité, santé, projet personnel).</p></div>
+        </div>
+        <div class="faq-item reveal d3">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h4>Combien de temps dure le parcours ?</h4>
+            <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Il n'y a pas de durée imposée. Tu avances à ton rythme. Certaines personnes terminent en 2 semaines, d'autres en 2 mois. NAYHA est toujours là quand tu reviens.</p></div>
+        </div>
+        <div class="faq-item reveal d4">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h4>Mes données sont-elles protégées ?</h4>
+            <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Absolument. Tes données personnelles et ton CV ne sont jamais partagés avec des tiers. Tout est chiffré et hébergé en France, conforme RGPD.</p></div>
+        </div>
+        <div class="faq-item reveal d5">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h4>Je peux annuler à tout moment ?</h4>
+            <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Oui, sans engagement. Tu peux annuler ton abonnement Standard ou Premium en un clic depuis l'app. Tu gardes l'accès jusqu'à la fin de ta période payée.</p></div>
+        </div>
+        <div class="faq-item reveal d6">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h4>L'IA remplace-t-elle un vrai conseiller ?</h4>
+            <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>NAYHA est un complément, pas un remplacement. L'IA t'aide à structurer ton parcours, générer des documents et t'entraîner. Pour un accompagnement humain, NAYHA peut être utilisé en parallèle avec ton conseiller Pôle emploi ou Mission locale.</p></div>
+        </div>
+        <div class="faq-item reveal d7">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h4>Sur quels appareils fonctionne NAYHA ?</h4>
+            <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>NAYHA est disponible sur iPhone (iOS 15+) et Android (8+). Télécharge l'app depuis l'App Store ou Google Play. Ton parcours se synchronise automatiquement entre tes appareils.</p></div>
+        </div>
+        <div class="faq-item reveal d7">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h4>Puis-je passer du Standard au Premium ?</h4>
+            <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Oui, à tout moment. Le Premium est facturé séparément et tu peux t'y inscrire quand tu veux. Tu gardes ton offre Standard et tu ajoutes les sessions de coaching mensuel en plus.</p></div>
+        </div>
+        <div class="faq-item reveal d7">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h4>Est-ce que je peux exporter mon CV en PDF ?</h4>
+            <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Oui. Ton CV est exportable en PDF directement depuis l'app. Le format est optimisé pour les filtres ATS utilisés par les recruteurs, ce qui maximise tes chances d'être vue.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BOTTOM -->
+  <section class="cta-section">
+    <div class="cta-bg">
+      <div class="cta-orb cta-orb-1"></div>
+      <div class="cta-orb cta-orb-2"></div>
+      <div class="cta-orb cta-orb-3"></div>
+    </div>
+    <div class="cta-content reveal">
+      <h2>Et si c'était maintenant ?</h2>
+      <p>Pas de formulaire. Pas de carte bancaire.<br>10 minutes suffisent pour commencer ton bilan.</p>
+      <div class="cta-stores">
+        <a href="#" class="store-badge cta-store-badge" aria-label="App Store">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div>
+            <span class="store-badge-sub">Disponible sur</span>
+            <span class="store-badge-name">App Store</span>
+          </div>
+        </a>
+        <a href="#" class="store-badge cta-store-badge" aria-label="Google Play">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 010 1.38l-2.302 2.302L15.396 13l2.302-2.492zM5.864 2.658L16.8 9.99l-2.302 2.302L5.864 3.658z"/></svg>
+          <div>
+            <span class="store-badge-sub">Disponible sur</span>
+            <span class="store-badge-name">Google Play</span>
+          </div>
+        </a>
+      </div>
+      <p class="cta-note">Gratuit · Aucune carte bancaire requise</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">NAYHA</span>
+          <p>Ton parcours professionnel, accompagné. NAYHA t'aide à retrouver confiance et emploi — à ton rythme, sans jugement.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Produit</h5>
+          <a href="#features">Fonctionnalités</a>
+          <a href="#app">L'app en action</a>
+          <a href="#pricing">Tarifs</a>
+          <a href="#parcours">Parcours</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h5>Télécharger</h5>
+          <a href="#">App Store (iOS)</a>
+          <a href="#">Google Play (Android)</a>
+          <a href="#">Blog</a>
+          <a href="#">Aide & support</a>
+        </div>
+        <div class="footer-col">
+          <h5>Légal</h5>
+          <a href="#">Mentions légales</a>
+          <a href="#">CGU</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">RGPD</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 NAYHA — Tous droits réservés</p>
+        <a href="#">Fait avec soin en France</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---- Mobile menu ----
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ---- Scroll reveal (all types) ----
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // ---- Nav scroll shadow ----
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // ---- Smooth anchor ----
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // ---- Back to top ----
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 600);
+    }, { passive: true });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ---- Cursor glow (hero only) ----
+    const cursorGlow = document.getElementById('cursorGlow');
+    const heroSection = document.getElementById('hero');
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.left = e.clientX + 'px';
+      cursorGlow.style.top = e.clientY + 'px';
+
+      const heroRect = heroSection.getBoundingClientRect();
+      const isInHero = e.clientY >= heroRect.top && e.clientY <= heroRect.bottom;
+      cursorGlow.classList.toggle('active', isInHero);
+    });
+
+    // ---- Animated counters ----
+    const counters = document.querySelectorAll('.counter');
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          if (target === 0) {
+            el.textContent = '0' + suffix;
+            counterObs.unobserve(el);
+            return;
+          }
+          let current = 0;
+          const step = Math.max(1, Math.floor(target / 40));
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            el.textContent = current + suffix;
+          }, 30);
+          counterObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObs.observe(c));
+
+    // ---- FAQ accordion ----
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      // Toggle clicked
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // ---- Timeline scroll fill ----
+    const timeline = document.getElementById('timeline');
+    const timelineFill = document.getElementById('timelineFill');
+    if (timeline && timelineFill) {
+      window.addEventListener('scroll', () => {
+        const rect = timeline.getBoundingClientRect();
+        const windowH = window.innerHeight;
+        if (rect.top < windowH && rect.bottom > 0) {
+          const trackHeight = rect.height - 50;
+          const progress = Math.min(1, Math.max(0, (windowH - rect.top) / (rect.height + windowH * 0.3)));
+          timelineFill.style.height = (progress * trackHeight) + 'px';
+        }
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>
