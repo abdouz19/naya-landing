@@ -209,7 +209,7 @@
       <h1>Email confirmé avec succès !</h1>
       <p>Votre adresse email a été vérifiée. Vous pouvez maintenant vous connecter à NAYHA.</p>
       <div class="buttons">
-        <a id="app-link" href="com.progix.nayha://login" class="btn btn-primary">
+        <a id="app-link" href="com.progix.nayha:///login" class="btn btn-primary">
           Ouvrir l'application
         </a>
       </div>
@@ -252,7 +252,7 @@
 
       // Handle PKCE flow — email is already confirmed by Supabase before redirect
       if (code) {
-        const deepLink = `${APP_SCHEME}://login?confirmed=true`;
+        const deepLink = `${APP_SCHEME}:///login?confirmed=true`;
         document.getElementById('app-link').href = deepLink;
         show('state-success');
         return;
