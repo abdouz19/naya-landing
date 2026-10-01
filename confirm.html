@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAYHA — Confirmation de votre email</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --rose: #C4626A;
+      --rose-light: #D4868C;
+      --rose-glow: rgba(196,98,106,0.15);
+      --brun: #3C2A22;
+      --brun-soft: #5A453B;
+      --or: #C49A2A;
+      --or-light: #E8C55C;
+      --creme: #FAF6F1;
+      --creme-dark: #F0EAE2;
+      --white: #FFFFFF;
+      --gray: #8A8078;
+      --green: #2F6B47;
+      --green-light: rgba(47,107,71,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--creme);
+      color: var(--brun);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: 0 4px 24px rgba(60,42,34,0.08), 0 1px 4px rgba(60,42,34,0.04);
+      max-width: 480px;
+      width: 100%;
+      padding: 48px 40px;
+      text-align: center;
+      animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      color: var(--rose);
+      margin-bottom: 32px;
+      letter-spacing: -0.5px;
+    }
+
+    .icon-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 36px;
+      transition: all 0.4s ease;
+    }
+
+    .icon-circle.loading {
+      background: var(--rose-glow);
+    }
+
+    .icon-circle.success {
+      background: var(--green-light);
+    }
+
+    .icon-circle.error {
+      background: rgba(196,98,106,0.1);
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--creme-dark);
+      border-top-color: var(--rose);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--brun);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    p {
+      font-size: 15px;
+      color: var(--brun-soft);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+      padding: 14px 32px;
+      border-radius: 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--rose);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--rose-light);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(196,98,106,0.3);
+    }
+
+    .btn-secondary {
+      background: var(--creme);
+      color: var(--brun);
+      border: 1px solid var(--creme-dark);
+    }
+
+    .btn-secondary:hover {
+      background: var(--creme-dark);
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hidden { display: none; }
+
+    .footer-text {
+      margin-top: 32px;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .footer-text a {
+      color: var(--rose);
+      text-decoration: none;
+    }
+
+    .footer-text a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 520px) {
+      .card { padding: 36px 24px; }
+      h1 { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="logo">NAYHA</div>
+
+    <!-- Loading state -->
+    <div id="state-loading">
+      <div class="icon-circle loading">
+        <div class="spinner"></div>
+      </div>
+      <h1>Vérification en cours…</h1>
+      <p>Nous confirmons votre adresse email.</p>
+    </div>
+
+    <!-- Success state -->
+    <div id="state-success" class="hidden">
+      <div class="icon-circle success">✓</div>
+      <h1>Email confirmé avec succès !</h1>
+      <p>Votre adresse email a été vérifiée. Vous pouvez maintenant vous connecter à NAYHA.</p>
+      <div class="buttons">
+        <a href="com.progix.nayha://login" class="btn btn-primary">
+          Ouvrir l'application
+        </a>
+      </div>
+      <p class="footer-text">
+        Vous n'avez pas encore l'application ?<br>
+        <a href="https://nayha-landing.vercel.app">Télécharger NAYHA</a>
+      </p>
+    </div>
+
+    <!-- Error state -->
+    <div id="state-error" class="hidden">
+      <div class="icon-circle error">✕</div>
+      <h1>Erreur de vérification</h1>
+      <p id="error-message">Le lien de confirmation est invalide ou a expiré.</p>
+      <div class="buttons">
+        <a href="https://nayha-landing.vercel.app" class="btn btn-secondary">
+          Retour à l'accueil
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://yskwdjaurwomsjpdgwgl.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlza3dkamF1cndvbXNqcGRnd2dsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzNzU5MTIsImV4cCI6MjEwMTk1MTkxMn0.39Y82IrPr0W-uK_h9vXjYB58H9lOmPTP7Z8MtRnIZWw';
+
+    function show(id) {
+      document.getElementById('state-loading').classList.add('hidden');
+      document.getElementById('state-success').classList.add('hidden');
+      document.getElementById('state-error').classList.add('hidden');
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    async function verifyEmail() {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get('code');
+      const token_hash = params.get('token_hash');
+      const type = params.get('type');
+
+      // Handle PKCE flow (code exchange)
+      if (code) {
+        try {
+          const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=pkce`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY,
+            },
+            body: JSON.stringify({
+              auth_code: code,
+              code_verifier: code,
+            }),
+          });
+
+          if (res.ok) {
+            show('state-success');
+          } else {
+            // Try as magic link token
+            const res2 = await fetch(`${SUPABASE_URL}/auth/v1/verify`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_ANON_KEY,
+              },
+              body: JSON.stringify({
+                type: 'signup',
+                token: code,
+              }),
+            });
+
+            if (res2.ok) {
+              show('state-success');
+            } else {
+              show('state-error');
+            }
+          }
+        } catch (e) {
+          show('state-error');
+        }
+        return;
+      }
+
+      // Handle token_hash flow
+      if (token_hash && type) {
+        try {
+          const res = await fetch(`${SUPABASE_URL}/auth/v1/verify`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY,
+            },
+            body: JSON.stringify({ type, token_hash }),
+          });
+
+          if (res.ok) {
+            show('state-success');
+          } else {
+            show('state-error');
+          }
+        } catch (e) {
+          show('state-error');
+        }
+        return;
+      }
+
+      // No code or token_hash — invalid link
+      document.getElementById('error-message').textContent =
+        'Ce lien de confirmation est invalide. Veuillez réessayer.';
+      show('state-error');
+    }
+
+    verifyEmail();
+  </script>
+
+</body>
+</html>
