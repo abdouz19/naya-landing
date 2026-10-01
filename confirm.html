@@ -209,7 +209,7 @@
       <h1>Email confirmé avec succès !</h1>
       <p>Votre adresse email a été vérifiée. Vous pouvez maintenant vous connecter à NAYHA.</p>
       <div class="buttons">
-        <a href="com.progix.nayha://login" class="btn btn-primary">
+        <a id="app-link" href="com.progix.nayha://login" class="btn btn-primary">
           Ouvrir l'application
         </a>
       </div>
@@ -235,6 +235,7 @@
   <script>
     const SUPABASE_URL = 'https://yskwdjaurwomsjpdgwgl.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlza3dkamF1cndvbXNqcGRnd2dsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzNzU5MTIsImV4cCI6MjEwMTk1MTkxMn0.39Y82IrPr0W-uK_h9vXjYB58H9lOmPTP7Z8MtRnIZWw';
+    const APP_SCHEME = 'com.progix.nayha';
 
     function show(id) {
       document.getElementById('state-loading').classList.add('hidden');
@@ -249,46 +250,14 @@
       const token_hash = params.get('token_hash');
       const type = params.get('type');
 
-      // Handle PKCE flow (code exchange)
+      // Handle PKCE flow — redirect code to app (app has the code_verifier)
       if (code) {
-        try {
-          const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=pkce`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_ANON_KEY,
-            },
-            body: JSON.stringify({
-              auth_code: code,
-              code_verifier: code,
-            }),
-          });
+        const deepLink = `${APP_SCHEME}://confirm?code=${encodeURIComponent(code)}`;
+        document.getElementById('app-link').href = deepLink;
+        show('state-success');
 
-          if (res.ok) {
-            show('state-success');
-          } else {
-            // Try as magic link token
-            const res2 = await fetch(`${SUPABASE_URL}/auth/v1/verify`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'apikey': SUPABASE_ANON_KEY,
-              },
-              body: JSON.stringify({
-                type: 'signup',
-                token: code,
-              }),
-            });
-
-            if (res2.ok) {
-              show('state-success');
-            } else {
-              show('state-error');
-            }
-          }
-        } catch (e) {
-          show('state-error');
-        }
+        // Try auto-opening the app
+        window.location.href = deepLink;
         return;
       }
 
