@@ -250,14 +250,11 @@
       const token_hash = params.get('token_hash');
       const type = params.get('type');
 
-      // Handle PKCE flow — redirect code to app (app has the code_verifier)
+      // Handle PKCE flow — email is already confirmed by Supabase before redirect
       if (code) {
-        const deepLink = `${APP_SCHEME}://confirm?code=${encodeURIComponent(code)}`;
+        const deepLink = `${APP_SCHEME}://login?confirmed=true`;
         document.getElementById('app-link').href = deepLink;
         show('state-success');
-
-        // Try auto-opening the app
-        window.location.href = deepLink;
         return;
       }
 
