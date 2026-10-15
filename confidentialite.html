@@ -73,16 +73,6 @@
       color: var(--brun-soft);
     }
 
-    nav.toc {
-      border: 1px solid var(--creme-dark);
-      border-radius: 16px;
-      padding: 18px 22px;
-      margin-bottom: 36px;
-    }
-    nav.toc strong { display: block; margin-bottom: 8px; }
-    nav.toc ol { padding-left: 20px; color: var(--brun-soft); }
-    nav.toc a { color: var(--brun-soft); text-decoration: none; }
-    nav.toc a:hover { color: var(--rose); }
 
     h2 {
       font-family: 'DM Serif Display', serif;
@@ -101,16 +91,6 @@
     li + li { margin-top: 6px; }
     a { color: var(--rose); }
 
-    .table-wrap { overflow-x: auto; margin: 12px 0; }
-    table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
-    th, td {
-      text-align: left;
-      vertical-align: top;
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--creme-dark);
-      color: var(--brun-soft);
-    }
-    th { color: var(--brun); font-weight: 600; background: var(--creme); }
 
 
     footer {
@@ -132,226 +112,71 @@
 
     <main class="card">
       <p class="intro">
-        Ton histoire t'appartient. Cette page explique, simplement, quelles données
-        NAYHA collecte quand tu utilises l'application, pourquoi, avec qui elles sont
-        partagées et comment tu gardes la main dessus.
+        Cette page explique quelles données NAYHA utilise quand tu utilises
+        l'application, pourquoi, et comment tu gardes la main dessus.
       </p>
 
-      <nav class="toc" aria-label="Sommaire">
-        <strong>Sommaire</strong>
-        <ol>
-          <li><a href="#responsable">Qui est responsable de tes données</a></li>
-          <li><a href="#donnees">Les données que nous traitons</a></li>
-          <li><a href="#finalites">Pourquoi nous les utilisons</a></li>
-          <li><a href="#ia">L'intelligence artificielle dans NAYHA</a></li>
-          <li><a href="#destinataires">Avec qui elles sont partagées</a></li>
-          <li><a href="#transferts">Transferts hors de l'Union européenne</a></li>
-          <li><a href="#conservation">Combien de temps nous les gardons</a></li>
-          <li><a href="#droits">Tes droits et comment les exercer</a></li>
-          <li><a href="#securite">Sécurité</a></li>
-          <li><a href="#mineurs">Personnes mineures</a></li>
-          <li><a href="#modifications">Modifications de cette politique</a></li>
-          <li><a href="#contact">Nous contacter</a></li>
-        </ol>
-      </nav>
-
-      <h2 id="responsable">1. Qui est responsable de tes données</h2>
+      <h2>1. Qui sommes-nous</h2>
       <p>
-        Le responsable du traitement est <strong>NAYHA</strong>, entreprise établie en France.
-      </p>
-      <p>
-        Pour toute question sur tes données :
-        <a href="mailto:contact@nayha.fr">contact@nayha.fr</a>.
+        L'application NAYHA est éditée par NAYHA, en France. Pour toute question sur
+        tes données : <a href="mailto:contact@progix.pro">contact@progix.pro</a>.
       </p>
 
-      <h2 id="donnees">2. Les données que nous traitons</h2>
-
-      <h3>Ton compte</h3>
+      <h2>2. Les données que nous utilisons</h2>
       <ul>
-        <li>Adresse email, mot de passe (jamais stocké en clair), prénom ou nom affiché.</li>
-        <li>Si tu en ajoutes une : ta photo de profil.</li>
-        <li>La date à laquelle tu as accepté cette politique.</li>
+        <li><strong>Ton compte</strong> : adresse email, mot de passe, nom et, si tu en ajoutes une, ta photo de profil.</li>
+        <li><strong>Ce que tu renseignes dans l'application</strong> : tes réponses aux diagnostics, les informations de ton parcours (retour à l'emploi, reconversion ou création d'activité) et les documents que tu crées (CV, lettres de motivation).</li>
+        <li><strong>Tes échanges</strong> : tes messages avec l'assistant NAYHA et ce que tu publies dans la communauté.</li>
+        <li><strong>Ton abonnement</strong> : l'offre choisie et son statut. Le paiement est géré par Apple ou Google : NAYHA n'a jamais accès à tes informations bancaires.</li>
       </ul>
 
-      <h3>Tes réponses et ton parcours</h3>
-      <ul>
-        <li>Tes réponses aux diagnostics de vie et professionnel, et le Portrait de Force et le plan d'action qui en découlent.</li>
-        <li>Les informations de ton parcours choisi : retour à l'emploi (métier visé, candidatures, relances, bilans, simulations d'entretien), reconversion (métier, formations, financement) ou création d'activité (situation, idée, marché, offre, statut, démarches, premiers contacts).</li>
-        <li>Les documents que tu crées : CV (y compris photo et signature si tu en ajoutes), lettres de motivation, texte de profil LinkedIn.</li>
-      </ul>
+      <h2>3. Pourquoi</h2>
       <p>
-        Certaines réponses aux diagnostics peuvent révéler des éléments personnels
-        (santé, situation familiale, difficultés traversées). Ces informations ne servent
-        qu'à t'accompagner et ne sont jamais utilisées à d'autres fins.
+        Uniquement pour te fournir le service : créer ton compte, t'accompagner dans ton
+        parcours, générer tes documents et gérer ton abonnement.
+        NAYHA ne vend pas tes données et ne les utilise pas pour de la publicité.
       </p>
 
-      <h3>Tes échanges</h3>
-      <ul>
-        <li>Les messages échangés avec le coach et les assistants de NAYHA.</li>
-        <li>Tes publications, commentaires et réactions dans la communauté, et les signalements que tu fais.</li>
-        <li>Si tu utilises la dictée vocale, ta voix est transcrite par le système de reconnaissance vocale de ton téléphone ; NAYHA ne reçoit que le texte.</li>
-      </ul>
+      <h2>4. Intelligence artificielle</h2>
+      <p>
+        Certaines fonctionnalités (analyses, CV, lettres, assistant) utilisent le service
+        d'intelligence artificielle d'OpenAI. Les informations nécessaires à la tâche
+        lui sont envoyées pour générer une réponse. Les contenus générés sont des
+        propositions, à relire et adapter.
+      </p>
 
-      <h3>Ton abonnement</h3>
+      <h2>5. Nos prestataires</h2>
       <ul>
-        <li>L'offre souscrite, son statut et ses dates. Le paiement est entièrement géré par Apple ou Google : NAYHA n'a jamais accès à ta carte bancaire.</li>
-      </ul>
-
-      <h3>Données d'utilisation</h3>
-      <ul>
-        <li>Ta dernière activité, ta progression, les ateliers et articles consultés, et le nombre d'utilisations des fonctionnalités d'intelligence artificielle (pour appliquer les limites d'usage équitable).</li>
+        <li><strong>Supabase</strong> : base de données et comptes, hébergés en Irlande (UE).</li>
+        <li><strong>Render</strong> : hébergement du serveur de l'application.</li>
+        <li><strong>OpenAI</strong> : intelligence artificielle.</li>
+        <li><strong>RevenueCat</strong> : gestion des abonnements.</li>
+        <li><strong>Apple et Google</strong> : distribution de l'application et paiement des abonnements.</li>
       </ul>
 
-      <h2 id="finalites">3. Pourquoi nous les utilisons</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Utilisation</th><th>Base légale</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Créer ton compte, te fournir l'accompagnement et les outils de NAYHA, sauvegarder ta progression</td>
-              <td>Exécution du contrat (conditions d'utilisation)</td>
-            </tr>
-            <tr>
-              <td>Traiter tes réponses aux diagnostics, y compris les éléments personnels que tu choisis de partager</td>
-              <td>Ton consentement, que tu peux retirer à tout moment</td>
-            </tr>
-            <tr>
-              <td>Gérer ton abonnement et ton accès aux fonctionnalités payantes</td>
-              <td>Exécution du contrat</td>
-            </tr>
-            <tr>
-              <td>Modérer la communauté, prévenir les abus et sécuriser le service (dont les limites d'usage de l'IA)</td>
-              <td>Intérêt légitime à protéger les utilisatrices et le service</td>
-            </tr>
-            <tr>
-              <td>Répondre à tes demandes et respecter nos obligations légales</td>
-              <td>Obligation légale</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p>NAYHA ne vend pas tes données et ne les utilise pas pour de la publicité.</p>
-
-      <h2 id="ia">4. L'intelligence artificielle dans NAYHA</h2>
+      <h2>6. Tes droits</h2>
       <p>
-        Pour produire ton Portrait de Force, tes CV et lettres, des pistes d'activité ou
-        les réponses du coach, NAYHA envoie à un service d'intelligence artificielle
-        uniquement les informations utiles à la tâche : par exemple ton prénom, tes
-        réponses, ton parcours ou le contenu de tes documents. Ton mot de passe n'est
-        jamais transmis.
+        Tu peux accéder à tes données, les corriger, les supprimer ou t'opposer à leur
+        utilisation. Dans l'application :
       </p>
-      <p>
-        Ce service est fourni par OpenAI. Selon ses conditions applicables à son API,
-        les données envoyées ne sont pas utilisées pour entraîner ses modèles.
-        Les contenus générés sont des propositions : ils ne constituent ni un avis
-        juridique, ni un avis médical, ni une garantie de résultat.
-      </p>
-      <p>
-        Aucune décision produisant des effets juridiques te concernant n'est prise de
-        manière entièrement automatisée.
-      </p>
-
-      <h2 id="destinataires">5. Avec qui elles sont partagées</h2>
-      <p>
-        Tes données sont accessibles uniquement aux personnes de l'équipe NAYHA qui en ont
-        besoin, et aux prestataires techniques ci-dessous, qui agissent pour notre compte :
-      </p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Prestataire</th><th>Rôle</th><th>Localisation</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Supabase</td><td>Base de données, authentification, stockage des fichiers</td><td>Irlande (UE)</td></tr>
-            <tr><td>Render</td><td>Hébergement du serveur de l'application ; les données y transitent et sont stockées chez Supabase</td><td>Union européenne</td></tr>
-            <tr><td>OpenAI</td><td>Intelligence artificielle (voir section 4)</td><td>États-Unis</td></tr>
-            <tr><td>RevenueCat</td><td>Gestion des abonnements</td><td>États-Unis</td></tr>
-            <tr><td>Apple, Google</td><td>Paiement des abonnements, distribution de l'application</td><td>Selon leurs propres politiques</td></tr>
-            <tr><td>Vercel</td><td>Hébergement de ce site</td><td>États-Unis</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p>
-        Pour te proposer des métiers, des offres d'emploi, des formations ou des aides,
-        NAYHA interroge des services publics (France Travail, data.gouv.fr, l'API
-        Apprentissage, France Compétences…). Ces requêtes contiennent des critères de
-        recherche (métier, commune, secteur), pas ton identité.
-      </p>
-      <p>
-        Dans la communauté, ce que tu publies est visible par les autres membres.
-      </p>
-      <p>
-        Nous pouvons enfin communiquer des données aux autorités lorsque la loi l'impose.
-      </p>
-
-      <h2 id="transferts">6. Transferts hors de l'Union européenne</h2>
-      <p>
-        Certains prestataires sont situés aux États-Unis. Ces transferts sont encadrés
-        par le cadre de protection des données UE–États-Unis (Data Privacy Framework)
-        lorsque le prestataire y adhère, ou par les clauses contractuelles types adoptées
-        par la Commission européenne.
-      </p>
-
-      <h2 id="conservation">7. Combien de temps nous les gardons</h2>
       <ul>
-        <li><strong>Tant que ton compte existe</strong> : tes données sont conservées pour que tu retrouves ton parcours.</li>
-        <li><strong>Quand tu supprimes ton compte</strong> : ton compte et toutes les données qui y sont liées (profil, diagnostics, parcours, documents, échanges, publications, fichiers) sont effacés immédiatement et définitivement. Les copies de sauvegarde techniques de notre hébergeur sont écrasées au fil de leur cycle normal, au plus tard sous 30 jours.</li>
-        <li><strong>Abonnement</strong> : les justificatifs de paiement sont conservés par Apple ou Google selon leurs propres obligations.</li>
-        <li><strong>Compte inactif</strong> : un compte sans connexion depuis 3 ans peut être supprimé, après t'avoir prévenue par email.</li>
-      </ul>
-
-      <h2 id="droits">8. Tes droits et comment les exercer</h2>
-      <p>Conformément au RGPD, tu disposes à tout moment des droits suivants :</p>
-      <ul>
-        <li><strong>Accès et portabilité</strong> : dans l'application, <em>Profil → Tes données → Exporter mes données</em> te remet une copie complète de tes données dans un fichier.</li>
-        <li><strong>Effacement</strong> : <em>Profil → Tes données → Supprimer mon compte</em> efface définitivement ton compte et tes données.</li>
-        <li><strong>Rectification</strong> : tu peux modifier tes informations directement dans l'application.</li>
-        <li><strong>Opposition et limitation</strong> du traitement, et <strong>retrait de ton consentement</strong> à tout moment, sans remettre en cause ce qui a été fait avant.</li>
-        <li><strong>Directives</strong> sur le sort de tes données après ton décès.</li>
+        <li><em>Profil → Tes données → Exporter mes données</em> pour en récupérer une copie ;</li>
+        <li><em>Profil → Tes données → Supprimer mon compte</em> pour supprimer ton compte et les données qui y sont liées.</li>
       </ul>
       <p>
-        Pour toute autre demande, écris-nous à
-        <a href="mailto:contact@nayha.fr">contact@nayha.fr</a>. Nous te répondons dans
-        un délai d'un mois.
+        Supprimer ton compte ne résilie pas un abonnement en cours : la résiliation se
+        fait dans les réglages de ton compte App Store ou Google Play.
       </p>
       <p>
-        Si tu estimes que tes droits ne sont pas respectés, tu peux adresser une
-        réclamation à la CNIL :
+        Pour toute autre demande : <a href="mailto:contact@progix.pro">contact@progix.pro</a>.
+        Tu peux aussi adresser une réclamation à la CNIL :
         <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">cnil.fr/fr/plaintes</a>.
       </p>
-      <p>
-        L'abonnement se gère et se résilie depuis les réglages de ton compte App Store
-        ou Google Play : supprimer ton compte NAYHA ne résilie pas automatiquement un
-        abonnement en cours.
-      </p>
 
-      <h2 id="securite">9. Sécurité</h2>
+      <h2>7. Modifications</h2>
       <p>
-        Les échanges entre l'application et nos serveurs sont chiffrés (HTTPS), les mots
-        de passe ne sont jamais stockés en clair, l'accès aux données est limité et
-        contrôlé, et chaque utilisatrice n'accède qu'à ses propres données.
-      </p>
-
-      <h2 id="mineurs">10. Personnes mineures</h2>
-      <p>
-        NAYHA accompagne des projets professionnels et s'adresse aux personnes majeures.
-        Si tu as moins de 18 ans, n'utilise pas l'application. Si nous apprenons qu'un
-        compte appartient à une personne mineure, nous le supprimons.
-      </p>
-
-      <h2 id="modifications">11. Modifications de cette politique</h2>
-      <p>
-        Nous pouvons faire évoluer cette politique. En cas de changement important, nous
-        te prévenons dans l'application avant qu'il s'applique. La date de dernière mise
-        à jour figure en haut de cette page.
-      </p>
-
-      <h2 id="contact">12. Nous contacter</h2>
-      <p>
-        NAYHA — France<br>
-        <a href="mailto:contact@nayha.fr">contact@nayha.fr</a>
+        Cette politique peut évoluer. La date de dernière mise à jour figure en haut de
+        cette page.
       </p>
     </main>
 
