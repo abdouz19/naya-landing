@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAYHA — Politique de confidentialité</title>
+  <meta name="description" content="Comment NAYHA collecte, utilise et protège tes données personnelles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --rose: #C4626A;
+      --rose-glow: rgba(196,98,106,0.12);
+      --brun: #3C2A22;
+      --brun-soft: #5A453B;
+      --creme: #FAF6F1;
+      --creme-dark: #F0EAE2;
+      --white: #FFFFFF;
+      --gray: #8A8078;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--creme);
+      color: var(--brun);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.65;
+      padding: 32px 16px 64px;
+    }
+
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    header { text-align: center; margin-bottom: 32px; }
+
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      color: var(--rose);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(30px, 6vw, 42px);
+      line-height: 1.15;
+      margin: 20px 0 8px;
+    }
+
+    .updated { color: var(--gray); font-size: 14px; }
+
+    .card {
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: 0 4px 24px rgba(60,42,34,0.06);
+      padding: 40px clamp(20px, 5vw, 48px);
+    }
+
+    .intro {
+      background: var(--rose-glow);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 32px;
+      color: var(--brun-soft);
+    }
+
+    nav.toc {
+      border: 1px solid var(--creme-dark);
+      border-radius: 16px;
+      padding: 18px 22px;
+      margin-bottom: 36px;
+    }
+    nav.toc strong { display: block; margin-bottom: 8px; }
+    nav.toc ol { padding-left: 20px; color: var(--brun-soft); }
+    nav.toc a { color: var(--brun-soft); text-decoration: none; }
+    nav.toc a:hover { color: var(--rose); }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+      font-size: 24px;
+      margin: 40px 0 12px;
+      scroll-margin-top: 16px;
+    }
+    h2:first-of-type { margin-top: 0; }
+
+    h3 { font-size: 16px; font-weight: 600; margin: 20px 0 6px; }
+
+    p, li { color: var(--brun-soft); font-size: 15.5px; }
+    p + p { margin-top: 10px; }
+    ul { padding-left: 20px; margin: 8px 0; }
+    li + li { margin-top: 6px; }
+    a { color: var(--rose); }
+
+    .table-wrap { overflow-x: auto; margin: 12px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--creme-dark);
+      color: var(--brun-soft);
+    }
+    th { color: var(--brun); font-weight: 600; background: var(--creme); }
+
+
+    footer {
+      text-align: center;
+      color: var(--gray);
+      font-size: 13px;
+      margin-top: 28px;
+    }
+    footer a { color: var(--gray); }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a class="logo" href="/">NAYHA</a>
+      <h1>Politique de confidentialité</h1>
+      <p class="updated">Dernière mise à jour : 15 octobre 2026</p>
+    </header>
+
+    <main class="card">
+      <p class="intro">
+        Ton histoire t'appartient. Cette page explique, simplement, quelles données
+        NAYHA collecte quand tu utilises l'application, pourquoi, avec qui elles sont
+        partagées et comment tu gardes la main dessus.
+      </p>
+
+      <nav class="toc" aria-label="Sommaire">
+        <strong>Sommaire</strong>
+        <ol>
+          <li><a href="#responsable">Qui est responsable de tes données</a></li>
+          <li><a href="#donnees">Les données que nous traitons</a></li>
+          <li><a href="#finalites">Pourquoi nous les utilisons</a></li>
+          <li><a href="#ia">L'intelligence artificielle dans NAYHA</a></li>
+          <li><a href="#destinataires">Avec qui elles sont partagées</a></li>
+          <li><a href="#transferts">Transferts hors de l'Union européenne</a></li>
+          <li><a href="#conservation">Combien de temps nous les gardons</a></li>
+          <li><a href="#droits">Tes droits et comment les exercer</a></li>
+          <li><a href="#securite">Sécurité</a></li>
+          <li><a href="#mineurs">Personnes mineures</a></li>
+          <li><a href="#modifications">Modifications de cette politique</a></li>
+          <li><a href="#contact">Nous contacter</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="responsable">1. Qui est responsable de tes données</h2>
+      <p>
+        Le responsable du traitement est <strong>NAYHA</strong>, entreprise établie en France.
+      </p>
+      <p>
+        Pour toute question sur tes données :
+        <a href="mailto:contact@nayha.fr">contact@nayha.fr</a>.
+      </p>
+
+      <h2 id="donnees">2. Les données que nous traitons</h2>
+
+      <h3>Ton compte</h3>
+      <ul>
+        <li>Adresse email, mot de passe (jamais stocké en clair), prénom ou nom affiché.</li>
+        <li>Si tu en ajoutes une : ta photo de profil.</li>
+        <li>La date à laquelle tu as accepté cette politique.</li>
+      </ul>
+
+      <h3>Tes réponses et ton parcours</h3>
+      <ul>
+        <li>Tes réponses aux diagnostics de vie et professionnel, et le Portrait de Force et le plan d'action qui en découlent.</li>
+        <li>Les informations de ton parcours choisi : retour à l'emploi (métier visé, candidatures, relances, bilans, simulations d'entretien), reconversion (métier, formations, financement) ou création d'activité (situation, idée, marché, offre, statut, démarches, premiers contacts).</li>
+        <li>Les documents que tu crées : CV (y compris photo et signature si tu en ajoutes), lettres de motivation, texte de profil LinkedIn.</li>
+      </ul>
+      <p>
+        Certaines réponses aux diagnostics peuvent révéler des éléments personnels
+        (santé, situation familiale, difficultés traversées). Ces informations ne servent
+        qu'à t'accompagner et ne sont jamais utilisées à d'autres fins.
+      </p>
+
+      <h3>Tes échanges</h3>
+      <ul>
+        <li>Les messages échangés avec le coach et les assistants de NAYHA.</li>
+        <li>Tes publications, commentaires et réactions dans la communauté, et les signalements que tu fais.</li>
+        <li>Si tu utilises la dictée vocale, ta voix est transcrite par le système de reconnaissance vocale de ton téléphone ; NAYHA ne reçoit que le texte.</li>
+      </ul>
+
+      <h3>Ton abonnement</h3>
+      <ul>
+        <li>L'offre souscrite, son statut et ses dates. Le paiement est entièrement géré par Apple ou Google : NAYHA n'a jamais accès à ta carte bancaire.</li>
+      </ul>
+
+      <h3>Données d'utilisation</h3>
+      <ul>
+        <li>Ta dernière activité, ta progression, les ateliers et articles consultés, et le nombre d'utilisations des fonctionnalités d'intelligence artificielle (pour appliquer les limites d'usage équitable).</li>
+      </ul>
+
+      <h2 id="finalites">3. Pourquoi nous les utilisons</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Utilisation</th><th>Base légale</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Créer ton compte, te fournir l'accompagnement et les outils de NAYHA, sauvegarder ta progression</td>
+              <td>Exécution du contrat (conditions d'utilisation)</td>
+            </tr>
+            <tr>
+              <td>Traiter tes réponses aux diagnostics, y compris les éléments personnels que tu choisis de partager</td>
+              <td>Ton consentement, que tu peux retirer à tout moment</td>
+            </tr>
+            <tr>
+              <td>Gérer ton abonnement et ton accès aux fonctionnalités payantes</td>
+              <td>Exécution du contrat</td>
+            </tr>
+            <tr>
+              <td>Modérer la communauté, prévenir les abus et sécuriser le service (dont les limites d'usage de l'IA)</td>
+              <td>Intérêt légitime à protéger les utilisatrices et le service</td>
+            </tr>
+            <tr>
+              <td>Répondre à tes demandes et respecter nos obligations légales</td>
+              <td>Obligation légale</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>NAYHA ne vend pas tes données et ne les utilise pas pour de la publicité.</p>
+
+      <h2 id="ia">4. L'intelligence artificielle dans NAYHA</h2>
+      <p>
+        Pour produire ton Portrait de Force, tes CV et lettres, des pistes d'activité ou
+        les réponses du coach, NAYHA envoie à un service d'intelligence artificielle
+        uniquement les informations utiles à la tâche : par exemple ton prénom, tes
+        réponses, ton parcours ou le contenu de tes documents. Ton mot de passe n'est
+        jamais transmis.
+      </p>
+      <p>
+        Ce service est fourni par OpenAI. Selon ses conditions applicables à son API,
+        les données envoyées ne sont pas utilisées pour entraîner ses modèles.
+        Les contenus générés sont des propositions : ils ne constituent ni un avis
+        juridique, ni un avis médical, ni une garantie de résultat.
+      </p>
+      <p>
+        Aucune décision produisant des effets juridiques te concernant n'est prise de
+        manière entièrement automatisée.
+      </p>
+
+      <h2 id="destinataires">5. Avec qui elles sont partagées</h2>
+      <p>
+        Tes données sont accessibles uniquement aux personnes de l'équipe NAYHA qui en ont
+        besoin, et aux prestataires techniques ci-dessous, qui agissent pour notre compte :
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Prestataire</th><th>Rôle</th><th>Localisation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Supabase</td><td>Base de données, authentification, stockage des fichiers</td><td>Irlande (UE)</td></tr>
+            <tr><td>Render</td><td>Hébergement du serveur de l'application ; les données y transitent et sont stockées chez Supabase</td><td>Union européenne</td></tr>
+            <tr><td>OpenAI</td><td>Intelligence artificielle (voir section 4)</td><td>États-Unis</td></tr>
+            <tr><td>RevenueCat</td><td>Gestion des abonnements</td><td>États-Unis</td></tr>
+            <tr><td>Apple, Google</td><td>Paiement des abonnements, distribution de l'application</td><td>Selon leurs propres politiques</td></tr>
+            <tr><td>Vercel</td><td>Hébergement de ce site</td><td>États-Unis</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Pour te proposer des métiers, des offres d'emploi, des formations ou des aides,
+        NAYHA interroge des services publics (France Travail, data.gouv.fr, l'API
+        Apprentissage, France Compétences…). Ces requêtes contiennent des critères de
+        recherche (métier, commune, secteur), pas ton identité.
+      </p>
+      <p>
+        Dans la communauté, ce que tu publies est visible par les autres membres.
+      </p>
+      <p>
+        Nous pouvons enfin communiquer des données aux autorités lorsque la loi l'impose.
+      </p>
+
+      <h2 id="transferts">6. Transferts hors de l'Union européenne</h2>
+      <p>
+        Certains prestataires sont situés aux États-Unis. Ces transferts sont encadrés
+        par le cadre de protection des données UE–États-Unis (Data Privacy Framework)
+        lorsque le prestataire y adhère, ou par les clauses contractuelles types adoptées
+        par la Commission européenne.
+      </p>
+
+      <h2 id="conservation">7. Combien de temps nous les gardons</h2>
+      <ul>
+        <li><strong>Tant que ton compte existe</strong> : tes données sont conservées pour que tu retrouves ton parcours.</li>
+        <li><strong>Quand tu supprimes ton compte</strong> : ton compte et toutes les données qui y sont liées (profil, diagnostics, parcours, documents, échanges, publications, fichiers) sont effacés immédiatement et définitivement. Les copies de sauvegarde techniques de notre hébergeur sont écrasées au fil de leur cycle normal, au plus tard sous 30 jours.</li>
+        <li><strong>Abonnement</strong> : les justificatifs de paiement sont conservés par Apple ou Google selon leurs propres obligations.</li>
+        <li><strong>Compte inactif</strong> : un compte sans connexion depuis 3 ans peut être supprimé, après t'avoir prévenue par email.</li>
+      </ul>
+
+      <h2 id="droits">8. Tes droits et comment les exercer</h2>
+      <p>Conformément au RGPD, tu disposes à tout moment des droits suivants :</p>
+      <ul>
+        <li><strong>Accès et portabilité</strong> : dans l'application, <em>Profil → Tes données → Exporter mes données</em> te remet une copie complète de tes données dans un fichier.</li>
+        <li><strong>Effacement</strong> : <em>Profil → Tes données → Supprimer mon compte</em> efface définitivement ton compte et tes données.</li>
+        <li><strong>Rectification</strong> : tu peux modifier tes informations directement dans l'application.</li>
+        <li><strong>Opposition et limitation</strong> du traitement, et <strong>retrait de ton consentement</strong> à tout moment, sans remettre en cause ce qui a été fait avant.</li>
+        <li><strong>Directives</strong> sur le sort de tes données après ton décès.</li>
+      </ul>
+      <p>
+        Pour toute autre demande, écris-nous à
+        <a href="mailto:contact@nayha.fr">contact@nayha.fr</a>. Nous te répondons dans
+        un délai d'un mois.
+      </p>
+      <p>
+        Si tu estimes que tes droits ne sont pas respectés, tu peux adresser une
+        réclamation à la CNIL :
+        <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">cnil.fr/fr/plaintes</a>.
+      </p>
+      <p>
+        L'abonnement se gère et se résilie depuis les réglages de ton compte App Store
+        ou Google Play : supprimer ton compte NAYHA ne résilie pas automatiquement un
+        abonnement en cours.
+      </p>
+
+      <h2 id="securite">9. Sécurité</h2>
+      <p>
+        Les échanges entre l'application et nos serveurs sont chiffrés (HTTPS), les mots
+        de passe ne sont jamais stockés en clair, l'accès aux données est limité et
+        contrôlé, et chaque utilisatrice n'accède qu'à ses propres données.
+      </p>
+
+      <h2 id="mineurs">10. Personnes mineures</h2>
+      <p>
+        NAYHA accompagne des projets professionnels et s'adresse aux personnes majeures.
+        Si tu as moins de 18 ans, n'utilise pas l'application. Si nous apprenons qu'un
+        compte appartient à une personne mineure, nous le supprimons.
+      </p>
+
+      <h2 id="modifications">11. Modifications de cette politique</h2>
+      <p>
+        Nous pouvons faire évoluer cette politique. En cas de changement important, nous
+        te prévenons dans l'application avant qu'il s'applique. La date de dernière mise
+        à jour figure en haut de cette page.
+      </p>
+
+      <h2 id="contact">12. Nous contacter</h2>
+      <p>
+        NAYHA — France<br>
+        <a href="mailto:contact@nayha.fr">contact@nayha.fr</a>
+      </p>
+    </main>
+
+    <footer>
+      <a href="/">Retour à l'accueil</a> · © 2026 NAYHA
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,6 +1,8 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/landing.html" },
-    { "source": "/confirm", "destination": "/confirm.html" }
+    { "source": "/confirm", "destination": "/confirm.html" },
+    { "source": "/confidentialite", "destination": "/confidentialite.html" },
+    { "source": "/privacy", "destination": "/confidentialite.html" }
   ]
 }
